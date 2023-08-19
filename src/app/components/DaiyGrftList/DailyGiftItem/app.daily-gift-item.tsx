@@ -94,8 +94,8 @@ const DailygiftItem = ({
               />
             </g>
             <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
+              fillRule="evenodd"
+              clipRule="evenodd"
               d="M34.6409 13.6628C35.3737 14.4034 35.3737 15.6041 34.6409 16.3446L20.5667 30.5669C19.8339 31.3075 18.6457 31.3075 17.9129 30.5669L8.5301 21.0854C7.79726 20.3448 7.79726 19.1442 8.5301 18.4036C9.26294 17.6631 10.4511 17.6631 11.1839 18.4036L19.2398 26.5442L31.987 13.6628C32.7199 12.9223 33.908 12.9223 34.6409 13.6628Z"
               fill="white"
             />
@@ -109,7 +109,7 @@ const DailygiftItem = ({
                 filterUnits="userSpaceOnUse"
                 colorInterpolationFilters="sRGB"
               >
-                <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                <feFlood floodOpacity="0" result="BackgroundImageFix" />
                 <feBlend
                   mode="normal"
                   in="SourceGraphic"

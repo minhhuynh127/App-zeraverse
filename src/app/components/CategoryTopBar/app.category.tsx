@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const Category = () => {
@@ -41,7 +42,7 @@ const Category = () => {
         <span className="w-[110px] h-[1px] bg-[#FFCDE9] mt-4 ml-2"></span>
 
         <li className="mt-4">
-          <button className="flex justify-between gap-[10px]">
+          <Link href={"/category"} className="flex justify-between gap-[10px]">
             <svg
               width="24"
               height="22"
@@ -56,10 +57,13 @@ const Category = () => {
             </svg>
 
             <span className="text-sm">All Category</span>
-          </button>
+          </Link>
         </li>
         <li className="mt-4">
-          <button className="flex justify-between gap-[10px]">
+          <Link
+            href={"/category/all"}
+            className="flex justify-between gap-[10px]"
+          >
             <svg
               width="28"
               height="22"
@@ -74,10 +78,13 @@ const Category = () => {
             </svg>
 
             <span className="text-sm">All Game Tags</span>
-          </button>
+          </Link>
         </li>
         <li className="mt-4">
-          <button className="flex justify-between gap-[10px]">
+          <Link
+            href={"/category/article"}
+            className="flex justify-between gap-[10px]"
+          >
             <svg
               width="28"
               height="22"
@@ -91,7 +98,7 @@ const Category = () => {
               />
             </svg>
             <span className="text-sm text-start">All Article Tags</span>
-          </button>
+          </Link>
         </li>
       </ul>
     </div>

@@ -1,5 +1,5 @@
 import React from "react";
-import DailygiftItem from "../DailyGiftItem/app.daily-gift-item";
+import DailygiftItem from "./DailyGiftItem/app.daily-gift-item";
 
 const DailyGiftList = () => {
   return (

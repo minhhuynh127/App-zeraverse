@@ -17,7 +17,7 @@ const myFont = localFont({
 });
 
 const TopBar = () => {
-  const check: boolean = true;
+  const check: boolean = false;
   // Open menu
   const [open, setOpen] = useState<boolean>(false);
   const hadleShowCategory = () => {
@@ -103,7 +103,8 @@ const TopBar = () => {
         </ul>
 
         <span className="w-full h-[2px] bg-[#8657FF] mt-4"></span>
-
+        {open && <Category />}
+        {open && <span className="w-full h-[2px] bg-[#8657FF] mt-4"></span>}
         {/* user login */}
         {check && (
           <div className="flex flex-col justify-center items-center mt-[18px]">
@@ -123,8 +124,6 @@ const TopBar = () => {
           </div>
         )}
 
-        {open && <Category />}
-        {open && <span className="w-full h-[2px] bg-[#8657FF] mt-4"></span>}
         {!check && (
           <div className="flex flex-col justify-between items-center mt-[18px]">
             <div className="flex flex-col justify-between items-center">

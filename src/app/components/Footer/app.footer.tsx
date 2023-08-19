@@ -22,12 +22,12 @@ const Footer = () => {
               <input
                 type="text"
                 placeholder="Enter your name"
-                className="w-[298px] h-10 rounded-[10px] bg-[#FFFFFF]"
+                className="w-[298px] h-10 rounded-[10px] bg-[#FFFFFF] pl-4"
               />
               <input
                 type="text"
                 placeholder="Enter your email"
-                className="w-[298px] h-10 rounded-[10px] bg-[#FFFFFF]"
+                className="w-[298px] h-10 rounded-[10px] bg-[#FFFFFF] pl-4"
               />
               <Button className="w-[125px] h-9 rounded-[10px] font-lato font-bold text-base tracking-[0.2%] leading-[25.6px] bg-gradient-to-tl from-[#5200FF] via-#7270FF to-[#F265E4] text-[#FFFFFF] hover:opacity-70 transition-opacity">
                 Subscribe now
