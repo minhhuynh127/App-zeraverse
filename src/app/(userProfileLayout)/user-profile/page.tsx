@@ -1,14 +1,13 @@
-import Image from "next/image";
-import React from "react";
 import imageMostPlayed from "@/public/images/games/image 25.png";
-import Link from "next/link";
 import iconRight from "@/public/right.png";
 import {
-  imagesRecentGame,
-  imagePlaylists,
-  imageAvatar,
   bgBrofile,
+  imageAvatar,
+  imagePlaylists,
+  imagesRecentGame,
 } from "@/src/app/(userProfileLayout)/user-profile/data/images";
+import Image from "next/image";
+import Link from "next/link";
 import Button from "../../components/Buttons/app.button";
 const UserProfilePage = () => {
   return (
@@ -127,7 +126,7 @@ const UserProfilePage = () => {
               </h3>
               <Image src={imageMostPlayed} alt="" />
             </div>
-
+            {/* Recent Games */}
             <div className="w-full flex flex-col gap-10">
               <div className="flex flex-col justify-center items-center gap-4">
                 <div className="w-full flex justify-between items-center">
@@ -161,6 +160,9 @@ const UserProfilePage = () => {
                   ))}
                 </div>
               </div>
+            </div>
+            {/* Loved games */}
+            <div className="w-full flex flex-col gap-10">
               <div className="flex flex-col justify-center items-center gap-4">
                 <div className="w-full flex justify-between items-center">
                   <h3 className="font-nunito font-bold text-2xl text-white">
@@ -194,7 +196,7 @@ const UserProfilePage = () => {
                 </div>
               </div>
             </div>
-
+            {/* Playlist */}
             <div className="w-full flex flex-col gap-10">
               <div className="flex flex-col justify-center items-center gap-4">
                 <div className="w-full flex justify-between items-center">
@@ -245,7 +247,7 @@ const UserProfilePage = () => {
                 </div>
               </div>
             </div>
-
+            {/* Purchase history */}
             <div className="w-full flex flex-col gap-10">
               <div className="flex flex-col justify-center items-center gap-4">
                 <div className="w-full flex justify-between items-center">

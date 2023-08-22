@@ -7,15 +7,38 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      gridTemplateRows: {
+        // Simple 8 row grid
+        "7": "repeat(7, minmax(0, 1fr))",
+      },
+      gridRow: {
+        "span-7": "span 7 / span 7",
+      },
+      gridColumnStart: {
+        "13": "13",
+        "14": "14",
+        "15": "15",
+        "16": "16",
+        "17": "17",
+      },
+      gridColumnEnd: {
+        "13": "13",
+        "14": "14",
+        "15": "15",
+        "16": "16",
+        "17": "17",
+      },
       boxShadow: {
         innerBtn:
           "rgb(0,0,0,0.4) -2px -2px 5px 0px inset, rgb(0,0,0,0.4) 2px 2px 3px 0px inset",
         inner1: "rgba(0, 0, 0, 0.2) 0px 3px 3px 0px inset;",
         inner2: "rgba(255,255,255, 0.4) 0px 0px 25px 10px;",
+        inner3: "#8052C7 -3px -3px 3px 0px inset;",
         dailyGrift:
           "0 10px 6px 2px rgb(0,0,0,0.1), rgb(0,0,0,0.2) 1px 1px 4px 0px inset, rgb(0,0,0,0.2) -1px 0 4px 0px inset",
       },
       backgroundImage: {
+        bgBannerGs: "url(/images/game-screen/bg-banner.png)",
         body: "url(/images/bg-body.png)",
         footer: "url(/images/footer-bg.png)",
         trending: "url(/images/bg-trending.png)",
@@ -56,12 +79,32 @@ const config: Config = {
 
       keyframes: {
         fadeIn: {
-          "0%": { translateX: "-740px" },
-          "100%": { translateX: "0" },
+          "0%": { top: "83px", opacity: "0" },
+          "100%": { top: "63px", opacity: "1" },
+        },
+        translateFadeIn: {
+          "0%": { left: "-800px", opacity: "0" },
+          "100%": { left: "0", opacity: "1" },
+        },
+        translateFadeOut: {
+          "0%": { left: "0", opacity: "1" },
+          "100%": { left: "-800px", opacity: "0" },
+        },
+        bottomToTop: {
+          "0%": { translateY: "200px", opacity: "0" },
+          "100%": { translateY: "0", opacity: "1" },
+        },
+        opacity: {
+          "0%": { display: "hidden", opacity: "0" },
+          "100%": { display: "block", opacity: "1" },
         },
       },
       animation: {
-        fadeIn: "fadeIn 4s ease-in-out linear",
+        fadeIn: "fadeIn both 0.4s",
+        translateFadeIn: "translateFadeIn both 1s",
+        translateFadeOut: "translateFadeOut both 1s",
+        bottomToTop: "bottomToTop both 2s",
+        opacity: "opacity both 4s",
       },
     },
   },

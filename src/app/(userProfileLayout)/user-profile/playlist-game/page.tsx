@@ -1,8 +1,10 @@
 import iconBack from "@/public/left-white.png";
+import iconRight from "@/public/right.png";
 import Button from "@/src/app/components/Buttons/app.button";
-import RecentGame from "@/src/app/components/RecentGame/app.recent-game";
 import Image from "next/image";
 import Link from "next/link";
+import { imagesPlaylistGames } from "../data/images";
+
 const PlaylistGamePage = () => {
   return (
     <div className="flex flex-col justify-between gap-6 w-full h-full">
@@ -20,8 +22,109 @@ const PlaylistGamePage = () => {
           </h3>
         </div>
 
-        <div className="w-full px-7 pb-[500px]">
-          <RecentGame />
+        <div className="w-full flex flex-col gap-10 px-[44px] mb-6">
+          <div className="flex flex-col justify-center items-center gap-4">
+            <div className="w-full flex justify-between items-center">
+              <h3 className="font-nunito font-bold text-2xl text-white">
+                2 Players
+              </h3>
+              <Link
+                href={"/user-profile/playlist-game/2-player"}
+                className="font-lato text-xs font-medium leading-[19.2px] text-white flex items-center gap-2"
+              >
+                View all
+                <Image
+                  src={iconRight}
+                  alt=""
+                  className="w-[4px] h-[8px] mr-1"
+                />
+              </Link>
+            </div>
+            <div className="flex flex-wrap gap-4 items-center justify-between">
+              {imagesPlaylistGames.map((item, index) => (
+                <Button
+                  className="hover:opacity-70 transition-opacity"
+                  key={index}
+                >
+                  <Image
+                    src={item.src}
+                    alt=""
+                    className="w-full object-cover rounded-[10px]"
+                  />
+                </Button>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className="w-full flex flex-col gap-10 px-[44px] mb-6">
+          <div className="flex flex-col justify-center items-center gap-4">
+            <div className="w-full flex justify-between items-center">
+              <h3 className="font-nunito font-bold text-2xl text-white">
+                Bad Game
+              </h3>
+              <Link
+                href={""}
+                className="font-lato text-xs font-medium leading-[19.2px] text-white flex items-center gap-2"
+              >
+                Bad Game
+                <Image
+                  src={iconRight}
+                  alt=""
+                  className="w-[4px] h-[8px] mr-1"
+                />
+              </Link>
+            </div>
+            <div className="flex flex-wrap gap-4 items-center justify-between">
+              {imagesPlaylistGames.map((item, index) => (
+                <Button
+                  className="hover:opacity-70 transition-opacity"
+                  key={index}
+                >
+                  <Image
+                    src={item.src}
+                    alt=""
+                    className="w-full object-cover rounded-[10px]"
+                  />
+                </Button>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className="w-full flex flex-col gap-10 px-[44px] pb-[400px] mb-6">
+          <div className="flex flex-col justify-center items-center gap-4">
+            <div className="w-full flex justify-between items-center">
+              <h3 className="font-nunito font-bold text-2xl text-white">
+                Bad Game
+              </h3>
+              <Link
+                href={""}
+                className="font-lato text-xs font-medium leading-[19.2px] text-white flex items-center gap-2"
+              >
+                View all
+                <Image
+                  src={iconRight}
+                  alt=""
+                  className="w-[4px] h-[8px] mr-1"
+                />
+              </Link>
+            </div>
+            <div className="flex flex-wrap gap-4 items-center justify-between">
+              {imagesPlaylistGames.map((item, index) => (
+                <Button
+                  className="hover:opacity-70 transition-opacity"
+                  key={index}
+                >
+                  <Image
+                    src={item.src}
+                    alt=""
+                    className="w-full object-cover rounded-[10px]"
+                  />
+                </Button>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </div>

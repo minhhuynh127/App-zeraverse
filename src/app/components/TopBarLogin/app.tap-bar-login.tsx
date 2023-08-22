@@ -95,9 +95,6 @@ const TopBarLogin = () => {
           </div>
         ))}
       </div>
-      <Button className="w-[149px] h-[31px] bg-pink-700 text-white py-[3px] px-[30px] rounded-[10px] text-xs font-nunito font-bold leading-[19.2px] mt-4 hover:opacity-70 transition-opacity">
-        Shop
-      </Button>
     </div>
   );
 };

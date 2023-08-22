@@ -41,27 +41,18 @@ const TopBar = () => {
           <li className="relative">
             <button onClick={() => hadleShowCategory()}>
               <svg
-                width="32"
-                height="28"
-                viewBox="0 0 32 28"
+                width="42"
+                height="42"
+                viewBox="0 0 42 42"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  d="M0.25 26.25C0.25 27.2165 1.0335 28 2 28L30 28C30.9665 28 31.75 27.2165 31.75 26.25C31.75 25.2835 30.9665 24.5 30 24.5L2 24.5C1.0335 24.5 0.25 25.2835 0.25 26.25ZM0.25 14C0.25 14.9665 1.0335 15.75 2 15.75L14.67 15.75C15.6365 15.75 16.42 14.9665 16.42 14C16.42 13.0335 15.6365 12.25 14.67 12.25L2 12.25C1.0335 12.25 0.25 13.0335 0.25 14ZM0.25 1.75C0.25 2.7165 1.0335 3.5 2 3.5L30 3.5C30.9665 3.5 31.75 2.7165 31.75 1.75C31.75 0.783503 30.9665 1.90735e-06 30 1.90735e-06L2 1.90735e-06C1.0335 1.90735e-06 0.25 0.783503 0.25 1.75Z"
+                  d="M5.25 33.25C5.25 34.2165 6.0335 35 7 35L35 35C35.9665 35 36.75 34.2165 36.75 33.25C36.75 32.2835 35.9665 31.5 35 31.5L7 31.5C6.0335 31.5 5.25 32.2835 5.25 33.25ZM5.25 21C5.25 21.9665 6.0335 22.75 7 22.75H19.67C20.6365 22.75 21.42 21.9665 21.42 21C21.42 20.0335 20.6365 19.25 19.67 19.25H7C6.0335 19.25 5.25 20.0335 5.25 21ZM5.25 8.75C5.25 9.7165 6.0335 10.5 7 10.5L35 10.5C35.9665 10.5 36.75 9.7165 36.75 8.75C36.75 7.7835 35.9665 7 35 7L7 7C6.0335 7 5.25 7.7835 5.25 8.75Z"
                   fill="#C4B5FD"
                 />
-              </svg>
-              <svg
-                className="block absolute top-[50%] translate-y-[-50%] right-0"
-                width="10"
-                height="6"
-                viewBox="0 0 10 6"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
                 <path
-                  d="M0.200195 0.48002L4.8202 5.52002L9.4402 0.48002L0.200195 0.48002Z"
+                  d="M25.2002 23.52L29.8202 18.48L34.4402 23.52L25.2002 23.52Z"
                   fill="#C4B5FD"
                 />
               </svg>
@@ -97,13 +88,19 @@ const TopBar = () => {
                   fill="#C4B5FD"
                 />
               </svg>
-              {isSearch && <SearchModal onClick={() => hadleSearch()} />}
+              {isSearch && (
+                <SearchModal
+                  className={`${isSearch} ? "block" : 'hidden"`}
+                  click={() => hadleSearch()}
+                />
+              )}
             </button>
           </li>
         </ul>
 
         <span className="w-full h-[2px] bg-[#8657FF] mt-4"></span>
-        {open && <Category />}
+        {open && <Category className={`${open} ? "block" : "hidden"`} />}
+
         {open && <span className="w-full h-[2px] bg-[#8657FF] mt-4"></span>}
         {/* user login */}
         {check && (
@@ -114,13 +111,6 @@ const TopBar = () => {
             <span className="font-lato font-medium text-base leading-[25.6px] tracking-[.2%] text-[#FFFFFF]">
               Username
             </span>
-            <div className="w-full bg-pink-700 h-[34px] rounded-[10px] flex justify-center items-center mt-[20px]">
-              <span
-                className={`${myFont.className} text-[#FFFF] text-base font-normal leading-[20.66px] tracking-[2px]`}
-              >
-                00:60:00
-              </span>
-            </div>
           </div>
         )}
 
@@ -139,15 +129,21 @@ const TopBar = () => {
                 Register
               </Link>
             </div>
-            <div className="w-full bg-pink-700 h-[34px] rounded-[10px] flex justify-center items-center mt-[59px]">
-              <span
-                className={`${myFont.className} text-[#FFFF] text-base font-normal leading-[20.66px] tracking-[2px]`}
-              >
-                00:60:00
-              </span>
-            </div>
           </div>
         )}
+        <Link
+          href={"/simple-shop"}
+          className="flex justify-center items-center w-[149px] h-[31px] bg-pink-700 text-white py-[3px] px-[30px] rounded-[10px] text-xs font-nunito font-bold leading-[19.2px] mt-4 hover:opacity-70 transition-opacity"
+        >
+          Shop
+        </Link>
+        <div className="w-full bg-pink-700 h-[34px] rounded-[10px] flex justify-center items-center mt-[20px]">
+          <span
+            className={`${myFont.className} text-[#FFFF] text-base font-normal leading-[20.66px] tracking-[2px]`}
+          >
+            00:60:00
+          </span>
+        </div>
       </div>
       {check && <TopBarLogin />}
     </div>

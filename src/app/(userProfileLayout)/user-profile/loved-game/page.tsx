@@ -1,5 +1,4 @@
 import iconBack from "@/public/left-white.png";
-import Button from "@/src/app/components/Buttons/app.button";
 import RecentGame from "@/src/app/components/RecentGame/app.recent-game";
 import Image from "next/image";
 import Link from "next/link";

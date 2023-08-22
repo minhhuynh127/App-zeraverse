@@ -4,14 +4,22 @@ import Button from "../Buttons/app.button";
 import PopularWeek from "../PopularWeek/app.popular-week";
 import RecentlyPlayed from "../Recentlyplayed/app.recently-played";
 
-const SearchModal = ({ onClick }: { onClick: () => void }) => {
+const SearchModal = ({
+  click,
+  className,
+}: {
+  click: () => void;
+  className: string;
+}) => {
   return (
-    <div className="fixed inset-0 bg-black/50 w-full h-full ">
+    <div
+      className={`${className} fixed inset-0 bg-black/50 w-full h-full z-50 transition-all animate-translateFadeIn`}
+    >
       <div
         className="bg-[#C4B5FD]/50 pl-[27px] pr-[59px] w-[740px] h-auto py-[20px] relative"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="w-16 h-16 absolute right-[-8px]" onClick={onClick}>
+        <div className="w-16 h-16 absolute right-[-8px]" onClick={click}>
           <Button className="w-full h-full rounded-[50%] bg-white flex justify-center items-center absolute right-[-32px]">
             <Image src={iconLeft} alt="" />
           </Button>

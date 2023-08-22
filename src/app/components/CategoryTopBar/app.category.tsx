@@ -1,9 +1,11 @@
 import Link from "next/link";
 import React from "react";
 
-const Category = () => {
+const Category = ({ className }: { className: string }) => {
   return (
-    <div className="py-7">
+    <div
+      className={`${className} animate-topToBottom transition-all overflow-hidden`}
+    >
       <ul className=" flex flex-col justify-between items-start text-[#FFFFFF] gap-4">
         <li className="mt-4">
           <button className="flex justify-between gap-[10px]">
