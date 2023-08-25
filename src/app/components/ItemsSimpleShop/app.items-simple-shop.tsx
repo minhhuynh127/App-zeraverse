@@ -44,7 +44,7 @@ const ItemsSimpleShop = ({
 
   return (
     <>
-      <div className="flex justify-center items center flex-wrap gap-4 animate-bottomToTop transition-all">
+      <div className="flex justify-center items center flex-wrap gap-4  animate-translateFadeIn transition-all">
         {currentItems.map((item, inx) => (
           <div key={inx} className="mt-[27px]">
             <div className="p-[10px] bg-pink-900 rounded-[30px] border border-pink-400">
@@ -88,12 +88,12 @@ const ItemsSimpleShop = ({
         breakClassName="page-item"
         breakLinkClassName="page-link"
         nextClassName="w-[8px] h-[14px]"
-        nextLinkClassName="w-[24px] h-[24px]  rounded-[5px] bg-violet-900 shadow-inner3 px-2 py-1"
+        nextLinkClassName="w-[24px] h-[24px]  rounded-[5px] bg-violet-900 shadow-[#8052C7_-3px_-3px_3px_0px_inset] px-2 py-1"
         pageClassName="page-item"
         pageLinkClassName="page-link"
         activeClassName="text-pink-400"
         previousClassName="w-[8px] h-[14px]"
-        previousLinkClassName="w-[24px] h-[24px]  rounded-[5px] bg-violet-900 shadow-inner3 px-2 py-1 "
+        previousLinkClassName="w-[24px] h-[24px]  rounded-[5px] bg-violet-900 shadow-[#8052C7_-3px_-3px_3px_0px_inset] px-2 py-1 "
         disabledLinkClassName="disabled:opacity-70 cursor-default"
       />
     </>

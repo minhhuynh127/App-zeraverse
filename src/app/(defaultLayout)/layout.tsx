@@ -8,8 +8,8 @@ export default function DefaultLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="bg-body object-cover bg-cover">
-      <div className="flex px-[13px] py-[16px] gap-4">
+    <div className="">
+      <div className="flex px-[13px] py-[16px] gap-4 ">
         <div className="max-h-[314px]">
           <TopBar />
         </div>

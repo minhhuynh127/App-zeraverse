@@ -4,6 +4,7 @@ const config: Config = {
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./node_modules/tw-elements/dist/js/**/*.js",
   ],
   theme: {
     extend: {
@@ -27,15 +28,6 @@ const config: Config = {
         "15": "15",
         "16": "16",
         "17": "17",
-      },
-      boxShadow: {
-        innerBtn:
-          "rgb(0,0,0,0.4) -2px -2px 5px 0px inset, rgb(0,0,0,0.4) 2px 2px 3px 0px inset",
-        inner1: "rgba(0, 0, 0, 0.2) 0px 3px 3px 0px inset;",
-        inner2: "rgba(255,255,255, 0.4) 0px 0px 25px 10px;",
-        inner3: "#8052C7 -3px -3px 3px 0px inset;",
-        dailyGrift:
-          "0 10px 6px 2px rgb(0,0,0,0.1), rgb(0,0,0,0.2) 1px 1px 4px 0px inset, rgb(0,0,0,0.2) -1px 0 4px 0px inset",
       },
       backgroundImage: {
         bgBannerGs: "url(/images/game-screen/bg-banner.png)",
@@ -83,31 +75,37 @@ const config: Config = {
           "100%": { top: "63px", opacity: "1" },
         },
         translateFadeIn: {
-          "0%": { left: "-800px", opacity: "0" },
-          "100%": { left: "0", opacity: "1" },
+          "0%": { transform: "translateY(100px)", opacity: "0" },
+          "100%": { transform: "translateY(0)", opacity: "1" },
         },
-        translateFadeOut: {
-          "0%": { left: "0", opacity: "1" },
-          "100%": { left: "-800px", opacity: "0" },
+        modalSearch: {
+          "0%": { transform: "translateX(-200px)", opacity: "0" },
+          "100%": { transform: "translateY(0)", opacity: "1" },
         },
-        bottomToTop: {
-          "0%": { translateY: "200px", opacity: "0" },
-          "100%": { translateY: "0", opacity: "1" },
+        openCategory: {
+          "0%": { height: "340px" },
+          "100%": { height: "700px" },
         },
         opacity: {
-          "0%": { display: "hidden", opacity: "0" },
-          "100%": { display: "block", opacity: "1" },
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
+        },
+        opacityOut: {
+          "0%": { opacity: "1" },
+          "100%": { opacity: "0" },
         },
       },
       animation: {
         fadeIn: "fadeIn both 0.4s",
         translateFadeIn: "translateFadeIn both 1s",
-        translateFadeOut: "translateFadeOut both 1s",
-        bottomToTop: "bottomToTop both 2s",
-        opacity: "opacity both 4s",
+        modalSearch: "modalSearch both 1s",
+        opacity: "opacity linear 1s",
+        opacityOut: "opacityOut linear 0.4s",
+        openCategory: "openCategory linear 0.4s",
       },
     },
   },
-  plugins: [],
+  plugins: [require("tw-elements/dist/plugin.cjs")],
+  darkMode: "class",
 };
 export default config;

@@ -32,9 +32,9 @@ const DailygiftItem = ({
     <div
       ref={itemClick}
       onClick={() => hadleCheck()}
-      className={`${className} w-[132px] bg-violet-400 rounded-[21px] relative shadow-innerBtn flex flex-col justify-between items-center`}
+      className={`${className} w-[132px] bg-violet-400 rounded-[21px] relative shadow-[rgb(0,0,0,0.4)_-2px_-2px_5px_0px_inset] flex flex-col justify-between items-center`}
     >
-      <div className="text-white w-full px-[20px] pt-2 bg-pink-400 text-center rounded-tl-[21px] rounded-tr-[21px] shadow-dailyGrift fot-nunito text-[33.38px] leading-[45.51px] font-bold font-nunito">
+      <div className="text-white w-full px-[20px] pt-2 bg-pink-400 text-center rounded-tl-[21px] rounded-tr-[21px] shadow-[0_10px_6px_2px_rgb(0,0,0,0.1)] fot-nunito text-[33.38px] leading-[45.51px] font-bold font-nunito">
         {day}
       </div>
       <div>

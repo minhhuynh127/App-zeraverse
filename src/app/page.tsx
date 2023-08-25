@@ -1,10 +1,10 @@
-import CategoryItem from "./components/CategoryItem/app.category-item";
+import CategoryItem from "./components/Category/CategoryItem/app.category-item";
 import Footer from "./components/Footer/app.footer";
 import Game from "./components/Games/app.game";
 import ModalDailyGift from "./components/ModalDailyGift/app.modal";
 import TopBar from "./components/TopBar/app.top-bar";
 import Trending from "./components/Trending/app.trending";
-const Page = ({ children }: { children: React.ReactNode }) => {
+const Page = () => {
   // const router = useRouter();
   // router.push("/home");
   return (

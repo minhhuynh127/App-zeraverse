@@ -7,11 +7,7 @@ const Footer = () => {
     <div className="bg-footer h-[404px] w-full object-cover">
       <div className="h-full flex justify-between items-center">
         <div className="logo ml-[70px]">
-          <Image
-            src={logoFooter}
-            alt="logo footer"
-            style={{ objectFit: "cover" }}
-          />
+          <Image src={logoFooter} alt="logo footer" className="object-cover" />
         </div>
         <div className="flex justify-between items-center mr-[124px] w-[45%]">
           <div>

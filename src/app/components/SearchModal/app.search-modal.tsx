@@ -1,8 +1,8 @@
 import iconLeft from "@/public/left.png";
 import Image from "next/image";
 import Button from "../Buttons/app.button";
-import PopularWeek from "../PopularWeek/app.popular-week";
 import RecentlyPlayed from "../Recentlyplayed/app.recently-played";
+import PopularWeek from "../Popular/PopularWeek/app.popular-week";
 
 const SearchModal = ({
   click,
@@ -13,7 +13,7 @@ const SearchModal = ({
 }) => {
   return (
     <div
-      className={`${className} fixed inset-0 bg-black/50 w-full h-full z-50 transition-all animate-translateFadeIn`}
+      className={`${className} fixed inset-0 bg-black/50 w-full h-full z-50 transition-all animate-modalSearch`}
     >
       <div
         className="bg-[#C4B5FD]/50 pl-[27px] pr-[59px] w-[740px] h-auto py-[20px] relative"

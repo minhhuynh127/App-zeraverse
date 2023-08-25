@@ -5,7 +5,7 @@ import { useState } from "react";
 import ItemsSimpleShop from "../../components/ItemsSimpleShop/app.items-simple-shop";
 
 const SimpleShopPageh1 = () => {
-  let type = ["Avatar", "Cover-page", "Playtimes"];
+  // let type = ["Avatar", "Cover-page", "Playtimes"];
   const [itemsState, setItemsState] = useState<any>(items);
   const [filterType, setFilterType] = useState<string>("Avatar");
   const hadleShowAvatar = () => {
@@ -38,12 +38,12 @@ const SimpleShopPageh1 = () => {
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
-            <path d="M6 1L1 6L6 11" stroke="#F472B6" stroke-linecap="round" />
+            <path d="M6 1L1 6L6 11" stroke="#F472B6" strokeLinecap="round" />
           </svg>
           <span>Back</span>
         </div>
       </Link>
-      <div className="min-w-[250.44px] max-h-55px] rounded-[14px] py-1 px-[42px] bg-pink-700 text-white font-nunito font-semibold text-[28px] leading-[39.2px] shadow-innerBtn absolute  left-[55%] translate-x-[-45%] top-[25px]">
+      <div className="min-w-[250.44px] max-h-55px] rounded-[14px] py-1 px-[42px] bg-pink-700 text-white font-nunito font-semibold text-[28px] leading-[39.2px] shadow-[rgb(0,0,0,0.4)_-4px_-4px_5px_0px_inset] absolute  left-[55%] translate-x-[-45%] top-[25px]">
         Simple Shop
       </div>
       <div className="w-full p-[62px]">

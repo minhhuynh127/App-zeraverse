@@ -1,6 +1,6 @@
 "use client";
 import logoTopbar from "@/public/images/logos/logo_02.png";
-import Category from "@/src/app/components/CategoryTopBar/app.category";
+import Category from "@/src/app/components/Category/CategoryTopBar/app.category";
 import localFont from "next/font/local";
 import Image from "next/image";
 import Link from "next/link";
@@ -38,6 +38,7 @@ const TopBar = () => {
           className="max-w-[134px] max-h-[72px] mt-[10px]"
         />
         <ul className="flex justify-between items-center gap-4 mt-[3px] py-[7px] px-[5.25px]">
+          {/* Category */}
           <li className="relative">
             <button onClick={() => hadleShowCategory()}>
               <svg
@@ -58,8 +59,9 @@ const TopBar = () => {
               </svg>
             </button>
           </li>
+          {/* Article */}
           <li>
-            <button>
+            <Link href={"/article"}>
               <svg
                 width="36"
                 height="28"
@@ -72,8 +74,9 @@ const TopBar = () => {
                   fill="#C4B5FD"
                 />
               </svg>
-            </button>
+            </Link>
           </li>
+          {/* Search */}
           <li>
             <button onClick={() => hadleSearch()}>
               <svg
@@ -89,10 +92,7 @@ const TopBar = () => {
                 />
               </svg>
               {isSearch && (
-                <SearchModal
-                  className={`${isSearch} ? "block" : 'hidden"`}
-                  click={() => hadleSearch()}
-                />
+                <SearchModal className="" click={() => hadleSearch()} />
               )}
             </button>
           </li>

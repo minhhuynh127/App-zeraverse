@@ -1,8 +1,11 @@
+"use client";
 import type { Metadata } from "next";
 import { Inter, Lato, Nunito } from "next/font/google";
 import Footer from "./components/Footer/app.footer";
 import TopBar from "./components/TopBar/app.top-bar";
 import "./globals.css";
+import Script from "next/script";
+import { useEffect } from "react";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -35,14 +38,21 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  useEffect(() => {
+    const use = async () => {
+      (await import("tw-elements")).default;
+    };
+    use();
+  }, []);
   return (
     <html
       suppressHydrationWarning={true}
       lang="en"
       className={`${lato.variable} ${nunito.variable} ${inter.variable}`}
     >
-      <body className="" suppressHydrationWarning={true}>
-        <div>{children}</div>
+      <body className="bg-body object-cover bg-cover">
+        <div className="w-full ">{children}</div>
+        {/* <Script src="../../node_modules/tw-elements/dist/js/tw-elements.umd.min.js" /> */}
       </body>
     </html>
   );

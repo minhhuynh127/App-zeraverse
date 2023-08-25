@@ -1,5 +1,5 @@
 import Link from "next/link";
-const TrendingCAtegory = () => {
+const TrendingCategory = () => {
   return (
     <div className="bg-trending max-w-full py-4 px-12 flex flex-col items-start gap-3 mt-[176px]">
       <div className="flex gap-1 text-white font-lato font-bold text-[10px] leading-4">
@@ -23,4 +23,4 @@ const TrendingCAtegory = () => {
   );
 };
 
-export default TrendingCAtegory;
+export default TrendingCategory;
