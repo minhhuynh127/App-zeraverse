@@ -1,8 +1,13 @@
+"use client";
 import React from "react";
+import { signIn } from "next-auth/react";
 
 const ButtonFacebook = () => {
   return (
-    <button className="w-[192px] h-9 flex justify-around items-center gap-2 py-[8px] px-[14px] rounded-[20px] font-lato font-bold text-base tracking-[0.2%] leading-[25.6px] bg-white">
+    <button
+      onClick={() => signIn()}
+      className="w-[192px] h-9 flex justify-around items-center gap-2 py-[8px] px-[14px] rounded-[20px] font-lato font-bold text-base tracking-[0.2%] leading-[25.6px] bg-white"
+    >
       <svg
         width="25"
         height="25"

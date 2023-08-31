@@ -1,11 +1,9 @@
 "use client";
 import type { Metadata } from "next";
+import { SessionProvider } from "next-auth/react";
 import { Inter, Lato, Nunito } from "next/font/google";
-import Footer from "./components/Footer/app.footer";
-import TopBar from "./components/TopBar/app.top-bar";
-import "./globals.css";
-import Script from "next/script";
 import { useEffect } from "react";
+import "./globals.css";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -50,8 +48,13 @@ export default function RootLayout({
       lang="en"
       className={`${lato.variable} ${nunito.variable} ${inter.variable}`}
     >
-      <body className="bg-body object-cover bg-cover">
-        <div className="w-full ">{children}</div>
+      <body
+        className="bg-body object-cover bg-cover"
+        suppressHydrationWarning={true}
+      >
+        <div className="w-full ">
+          <SessionProvider>{children}</SessionProvider>
+        </div>
         {/* <Script src="../../node_modules/tw-elements/dist/js/tw-elements.umd.min.js" /> */}
       </body>
     </html>

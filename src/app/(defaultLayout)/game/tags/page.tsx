@@ -3,7 +3,7 @@ import React from "react";
 
 const GameTagsPage = () => {
   return (
-    <div className="w-full min-h-[500px] bg-black/80 border-[5px] border-pink-400 rounded-[20px]">
+    <div className="w-full min-h-[1000px] bg-black/80 border-[5px] border-pink-400 rounded-[20px]">
       <div className="font-lato font-bold text-lg text-white leading-[25.6px] pt-[60px] pl-[40px] flex gap-2">
         <Link href={"/"}>Home</Link>
         <span>/</span>

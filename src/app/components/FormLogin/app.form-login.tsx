@@ -1,17 +1,72 @@
-import React from "react";
+"use client";
+import logo from "@/public/images/logos/logo_02.png";
+import { yupResolver } from "@hookform/resolvers/yup";
+import Image from "next/image";
+import Link from "next/link";
+import { redirect, useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
+import * as yup from "yup";
 import ButtonFacebook from "../Buttons/app.button-facebook";
 import ButtonGoogle from "../Buttons/app.button-google";
-import Image from "next/image";
-import logo from "@/public/images/logos/logo_02.png";
-import Link from "next/link";
-import Button from "../Buttons/app.button";
+import { useSession } from "next-auth/react";
+
+const schema = yup
+  .object({
+    email: yup.string().required("Email is required").email("Invalid email"),
+    password: yup.string().required("Password is required").min(5),
+  })
+  .required();
+let errorPassword: string = "";
 
 const FormLogin = () => {
+  const router = useRouter();
+
+  // check user login
+  const { data: session } = useSession();
+  if (session && session.user) {
+    const userLogin = session.user;
+    localStorage.setItem("userData", JSON.stringify(userLogin));
+    redirect("/");
+  }
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
+  const onSubmit = async (data: {}, e: any) => {
+    e.preventDefault();
+    try {
+      const response = await fetch(
+        "https://user-api.zeraverse.io/api/v1/auth/login-email",
+        {
+          method: "POST", // or 'PUT'
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
+      if (response.status === 200) {
+        const result = await response.json();
+        localStorage.setItem("userData", JSON.stringify(result));
+        router.push("/");
+      } else {
+        errorPassword = "Invalid email or password";
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
   return (
     <div className="flex justify-center items-center h-[100vh]">
       <div className="px-[61px] pt-[17px] pb-[40px] bg-black/70 rounded-[30px] flex flex-col justify-center items-center">
-        <Image src={logo} alt="logo" className="w-[220px] h-[108px]" />
-        <form action="" className="mt-4">
+        <div>
+          <Image src={logo} alt="logo" className="w-[220px] h-[108px]" />
+        </div>
+        <form action="" className="mt-4" onSubmit={handleSubmit(onSubmit)}>
           <div className="flex flex-col gap-1">
             <label
               htmlFor=""
@@ -20,9 +75,13 @@ const FormLogin = () => {
               Email
             </label>
             <input
+              {...register("email")}
               type="text"
               className="w-[400px] h-[45px] bg-white rounded-[10px] pl-2 text-violet-700 text-xl"
             />
+            <span className="text-pink-700 font-bold text-base">
+              {errors.email?.message}
+            </span>
           </div>
           <div className="flex flex-col gap-1 mt-[10px]">
             <label
@@ -30,12 +89,10 @@ const FormLogin = () => {
               className="text-white font-lato font-bold text-base leading-[25.6px] tracking-wide flex justify-between"
             >
               Password
-              <span className="font-inter text-xs font-normal text-pink-800 leading-4 flex justify-center items-end">
-                *password not entered
-              </span>
             </label>
             <div className="w-[400px] h-[45px] relative">
               <input
+                {...register("password")}
                 type="password"
                 className=" bg-white rounded-[10px] w-full h-full pl-2 text-violet-700 text-xl"
               />
@@ -66,6 +123,14 @@ const FormLogin = () => {
                 />
               </svg>
             </div>
+            {errorPassword && (
+              <span className="text-pink-700 font-bold text-base">
+                {errorPassword}
+              </span>
+            )}
+            <span className="text-pink-700 font-bold text-base">
+              {errors.password?.message}
+            </span>
           </div>
           <div className="mt-1 flex justify-center items-center">
             <input
@@ -82,10 +147,19 @@ const FormLogin = () => {
               </span> and <span className="text-violet-300">Privacy</span>
             </label>
           </div>
+          <Link
+            href={"/forgot-password"}
+            className="font-lato font-semibold text-sm leading-[22.4px] text-violet-300 flex justify-center items-center mt-2"
+          >
+            Forgot the password ?
+          </Link>
           <div className="mt-[15px]">
-            <Button className="w-[400px] h-9 py-[5px] px-[80px] rounded-[20px] font-lato font-bold text-base tracking-[0.2%] leading-[25.6px] bg-gradient-to-tl from-[#5200FF] via-#7270FF to-[#F265E4] text-[#FFFFFF] hover:opacity-70 transition-opacity">
+            <button
+              type="submit"
+              className="w-[400px] h-9 py-[5px] px-[80px] rounded-[20px] font-lato font-bold text-base tracking-[0.2%] leading-[25.6px] bg-gradient-to-tl from-[#5200FF] via-#7270FF to-[#F265E4] text-[#FFFFFF] hover:opacity-70 transition-opacity"
+            >
               Login
-            </Button>
+            </button>
           </div>
         </form>
         <span className="text-sm font-semibold font-lato leading-[22.4px] tracking-[0.2%] text-[#FFFFFF] mt-[11px]">

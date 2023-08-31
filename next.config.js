@@ -1,6 +1,24 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  /* config options here */
+  serverRuntimeConfig: {
+    NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
+  },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "**",
+        port: "",
+        pathname: "**",
+      },
+    ],
+  },
+  i18n: {
+    locales: ["default", "/", ""],
+    defaultLocale: "default",
+    localeDetection: true,
+  },
+  trailingSlash: true,
 };
 
 module.exports = nextConfig;

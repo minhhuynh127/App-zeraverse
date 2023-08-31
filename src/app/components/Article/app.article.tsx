@@ -46,7 +46,9 @@ const ArticleAll = ({ itemsPerPage }: { itemsPerPage: number }) => {
         <TrendingNew></TrendingNew>
         <PopularNew></PopularNew>
         <div className="w-full flex gap-6 justify-start items-center">
-          <Image src={logoNew} alt="" className="" />
+          <div>
+            <Image src={logoNew} alt="" className="" />
+          </div>
           <button className="text-white font-lato text-[20px] leading-[28px]-[101px] h-[44px] px-[10px] py-[10px] bg-pink-700">
             All Article
           </button>
@@ -58,11 +60,13 @@ const ArticleAll = ({ itemsPerPage }: { itemsPerPage: number }) => {
               key={idx}
               className="bg-gradient-to-br from-[#89F8FF]/25 via-[#FFA5EB]/25 to-[#FFF59E]/25 p-2 rounded-[10px]"
             >
-              <Image
-                src={item.src}
-                alt=""
-                className="w-full h-[244px] object-cover rounded-[10px]"
-              />
+              <div>
+                <Image
+                  src={item.src}
+                  alt=""
+                  className="w-full h-[244px] object-cover rounded-[10px]"
+                />
+              </div>
               <div className="w-full flex flex-col">
                 <h3 className="font-lato font-bold text-[24px] leading-[33.9px] text-white">
                   {item.title}

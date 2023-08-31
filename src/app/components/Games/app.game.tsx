@@ -1,11 +1,28 @@
 "use client";
-
-import { imagesGame } from "@/src/app/components/Games/images";
 import Image from "next/image";
-import { useEffect, useRef } from "react";
-import Button from "../Buttons/app.button";
+import { useEffect, useRef, useState } from "react";
 
 const Game = () => {
+  const [dataGames, setDataGames] = useState<any[]>([]);
+  useEffect(() => {
+    fetch(`https://user-api.zeraverse.io/api/v1/game?page=1&limit=105`)
+      .then((response) => {
+        // Check if the response status is OK (status code 200)
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        // Parse the JSON response
+        return response.json();
+      })
+      .then((games) => {
+        setDataGames(games.data.rows);
+      })
+      .catch((error) => {
+        // Handle errors here
+        console.error("Error:", error);
+      });
+  }, []);
+
   const parentRef = useRef<HTMLDivElement | null>(null);
   const itemRef = useRef<HTMLButtonElement[]>([]);
   useEffect(() => {
@@ -34,17 +51,23 @@ const Game = () => {
     itemMediumList.forEach((item) => {
       item.classList.add("col-span-2", "row-span-2");
     });
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [itemRef.current]);
   return (
     <div className="flex flex-col justify-between gap-4 flex-1">
       <div
         ref={parentRef}
         className="w-full grid grid-cols-11 grid-flow-dense gap-4"
       >
-        {imagesGame.map((image, index) => (
-          <button className="" key={index}>
+        {dataGames.map((game, index) => (
+          <button
+            className="hover:opacity-70 transition-all hover:scale-105"
+            key={index}
+          >
             <Image
-              src={image.src}
+              src={game?.thumbnail}
+              width={500}
+              height={500}
               alt="gamePicture"
               className={`w-full h-full rounded-xl object-cover ${index}`}
             />

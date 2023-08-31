@@ -414,9 +414,9 @@ const VertySuccessPage = () => {
       </h3>
       <div className="mt-[9px]">
         <Link href={"/"}>
-          <Button className="w-[142px] h-9 rounded-[30px] px-[30px] py-[5px] font-lato font-bold text-base tracking-[0.2%] leading-[25.6px] bg-gradient-to-t from-[#EF36C6] via-#C4B5FD to-[#979BFF] text-[#FFFFFF] hover:opacity-70 transition-opacity">
+          <a className="w-[142px] h-9 rounded-[30px] px-[30px] py-[5px] font-lato font-bold text-base tracking-[0.2%] leading-[25.6px] bg-gradient-to-t from-[#EF36C6] via-#C4B5FD to-[#979BFF] text-[#FFFFFF] hover:opacity-70 transition-opacity">
             Let’s Play
-          </Button>
+          </a>
         </Link>
       </div>
     </div>

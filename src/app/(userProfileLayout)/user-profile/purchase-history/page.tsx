@@ -19,7 +19,9 @@ const PurchaseHistoryPage = () => {
             href={"/user-profile"}
             className="flex justify-center items-center text-white gap-[5px] w-[41px] h-[22px]"
           >
-            <Image src={iconBack} alt="" className="w-[5px] h-[10px]" />
+            <div>
+              <Image src={iconBack} alt="" className="w-[5px] h-[10px]" />
+            </div>
             Back
           </Link>
           <h3 className="flex-1 text-center font-nunito font-bold text-[32px] leading-[43.65px] text-white">

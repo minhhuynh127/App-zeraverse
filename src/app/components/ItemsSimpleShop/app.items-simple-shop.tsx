@@ -48,7 +48,9 @@ const ItemsSimpleShop = ({
         {currentItems.map((item, inx) => (
           <div key={inx} className="mt-[27px]">
             <div className="p-[10px] bg-pink-900 rounded-[30px] border border-pink-400">
-              <Image src={item?.src} alt="" className="rounded-[20px]" />
+              <div>
+                <Image src={item?.src} alt="" className="rounded-[20px]" />
+              </div>
               <h3 className="font-lato font-bold text-base text-white mt-2">
                 {item.name}
               </h3>
@@ -58,7 +60,9 @@ const ItemsSimpleShop = ({
                     <span className="font-nunito font-extrabold text-sm text-white">
                       {item.price === 0 ? "" : item.price}
                     </span>
-                    <Image src={price} alt="" />
+                    <div>
+                      <Image src={price} alt="" />
+                    </div>
                   </div>
                 )}
 

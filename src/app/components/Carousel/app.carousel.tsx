@@ -51,11 +51,13 @@ function CarouselArticle() {
               {...(index === 0 ? { "data-te-carousel-active": true } : {})}
             >
               <div className="relative">
-                <Image
-                  src={item.src}
-                  alt="image"
-                  className="w-full max-h-[537px] rounded-[5px]"
-                />
+                <div>
+                  <Image
+                    src={item.src}
+                    alt="image"
+                    className="w-full max-h-[537px] rounded-[5px]"
+                  />
+                </div>
                 <div className="absolute bg-black/80 w-[380px] h-full top-0 right-0 rounded-tr-[10px] rounded-br-[10px] flex flex-col justify-center items-start px-[36px] gap-2 z-30">
                   <button className="w-[92px] h-[25px] px-[10px] py-[6px] font- nunito font-normal text-[10px] leading-[14px] bg-white rounded-[10px]">
                     Technology
@@ -103,12 +105,12 @@ function CarouselArticle() {
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
-              stroke-width="1.5"
+              strokeWidth="1.5"
               stroke="currentColor"
               className="h-8 w-8"
             >
               <path
-                stroke-linecap="round"
+                strokeLinecap="round"
                 strokeWidth="round"
                 d="M15.75 19.5L8.25 12l7.5-7.5"
               />
@@ -129,12 +131,12 @@ function CarouselArticle() {
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
-              stroke-width="1.5"
+              strokeWidth="1.5"
               stroke="currentColor"
               className="h-8 w-8"
             >
               <path
-                stroke-linecap="round"
+                strokeLinecap="round"
                 strokeWidth="round"
                 d="M8.25 4.5l7.5 7.5-7.5 7.5"
               />

@@ -1,6 +1,5 @@
 import Footer from "../components/Footer/app.footer";
 import TopBar from "../components/TopBar/app.top-bar";
-import TopBarLogin from "../components/TopBarLogin/app.tap-bar-login";
 
 export default function DefaultLayout({
   children,

@@ -47,12 +47,14 @@ const GameCategoryAll = () => {
           key={index}
           className="flex justify-center items-center bg-white rounded-[10px] col-span-2"
         >
-          <Image
-            ref={imageRef}
-            src={image.src}
-            alt="gamePicture"
-            className={`w-[50%] rounded-tl-[10px] rounded-bl-[10px] ${index}`}
-          />
+          <div>
+            <Image
+              ref={imageRef}
+              src={image.src}
+              alt="gamePicture"
+              className={`w-[50%] rounded-tl-[10px] rounded-bl-[10px] ${index}`}
+            />
+          </div>
           <span className="text-violet-900 text-base font-semibold py-2">
             Category name
           </span>

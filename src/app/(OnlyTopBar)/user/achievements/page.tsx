@@ -34,7 +34,9 @@ const AchievementsPage = () => {
           <div className="flex gap-[25px] justify-center items-center">
             <div className="w-[204px] h-[314px] flex flex-col justify-between items-center gap-[55px] px-[13px] py-[22px] bg-gradient-to-b from-[#D34880]  to-[#2F0652] rounded-[30px]">
               <div className="flex flex-col justify-center items-center gap-[10px] px-[15px] py-[10px]">
-                <Image src={zeraCoin} alt="" />
+                <div>
+                  <Image src={zeraCoin} alt="" />
+                </div>
                 <span className="text-transparent text-[28px] bg-clip-text bg-gradient-to-b from-[#979BFF] via-[#C4B5FD] to-[#EF36C6]">
                   10000
                 </span>
@@ -81,7 +83,9 @@ const AchievementsPage = () => {
                   className="w-[435px] flex gap-10 p-[10px] bg-gradient-to-b from-[#8B5CF6] to-[#503098] rounded-[20px]"
                 >
                   <div className="flex flex-1 gap-2 items-center">
-                    <Image src={item.src} alt="" className="rounded-[10px]" />
+                    <div>
+                      <Image src={item.src} alt="" className="rounded-[10px]" />
+                    </div>
                     <span className="font-lato font-bold text-base leading-[25.6px] text-white">
                       {item.name}
                     </span>
@@ -90,53 +94,12 @@ const AchievementsPage = () => {
                     <span className="font-lato font-bold text-base leading-[25.6px] text-white">
                       {item.coin}
                     </span>
-                    <Image src={iconCoin} alt=""></Image>
+                    <div>
+                      <Image src={iconCoin} alt=""></Image>
+                    </div>
                   </div>
                 </div>
               ))}
-
-              {/* <div className="flex gap-20 p-[10px] bg-gradient-to-b from-[#8B5CF6] to-[#503098] rounded-[20px]">
-                <div className="flex gap-2 items-center">
-                  <Image src={image1} alt="" className="rounded-[10px]" />
-                  <span className="font-lato font-bold text-base leading-[25.6px] text-white">
-                    Onmyoji The World
-                  </span>
-                </div>
-                <div className="flex gap-4 items-center">
-                  <span className="font-lato font-bold text-base leading-[25.6px] text-white">
-                    1000
-                  </span>
-                  <Image src={iconCoin} alt=""></Image>
-                </div>
-              </div>
-              <div className="flex gap-20 p-[10px] bg-gradient-to-b from-[#8B5CF6] to-[#503098] rounded-[20px]">
-                <div className="flex gap-2 items-center">
-                  <Image src={image1} alt="" className="rounded-[10px]" />
-                  <span className="font-lato font-bold text-base leading-[25.6px] text-white">
-                    Onmyoji The World
-                  </span>
-                </div>
-                <div className="flex gap-4 items-center">
-                  <span className="font-lato font-bold text-base leading-[25.6px] text-white">
-                    1000
-                  </span>
-                  <Image src={iconCoin} alt=""></Image>
-                </div>
-              </div>
-              <div className="flex gap-20 p-[10px] bg-gradient-to-b from-[#8B5CF6] to-[#503098] rounded-[20px]">
-                <div className="flex gap-2 items-center">
-                  <Image src={image1} alt="" className="rounded-[10px]" />
-                  <span className="font-lato font-bold text-base leading-[25.6px] text-white">
-                    Onmyoji The World
-                  </span>
-                </div>
-                <div className="flex gap-4 items-center">
-                  <span className="font-lato font-bold text-base leading-[25.6px] text-white">
-                    1000
-                  </span>
-                  <Image src={iconCoin} alt=""></Image>
-                </div>
-              </div> */}
             </div>
           </div>
         </div>

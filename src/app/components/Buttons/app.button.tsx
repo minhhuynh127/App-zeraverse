@@ -1,5 +1,4 @@
 import React from "react";
-
 const Button = ({
   className,
   children,
@@ -8,9 +7,9 @@ const Button = ({
   children: React.ReactNode;
 }) => {
   return (
-    <>
-      <button className={className}>{children}</button>
-    </>
+    <button className={className}>
+      <div>{children}</div>
+    </button>
   );
 };
 

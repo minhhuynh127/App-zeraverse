@@ -4,7 +4,7 @@ import React from "react";
 const Category = ({ className }: { className: string }) => {
   return (
     <div
-      className={`${className} animate-opacity transition-opacity overflow-hidden`}
+      className={`${className} animate-opacity transition-all duration-500 overflow-hidden`}
     >
       <ul className=" flex flex-col justify-between items-start text-[#FFFFFF] gap-4">
         <li className="mt-4">

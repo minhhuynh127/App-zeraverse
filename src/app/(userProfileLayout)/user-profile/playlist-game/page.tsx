@@ -14,7 +14,9 @@ const PlaylistGamePage = () => {
             href={"/user-profile"}
             className="flex justify-center items-center text-white gap-[5px] w-[41px] h-[22px]"
           >
-            <Image src={iconBack} alt="" className="w-[5px] h-[10px]" />
+            <div>
+              <Image src={iconBack} alt="" className="w-[5px] h-[10px]" />
+            </div>
             Back
           </Link>
           <h3 className="flex-1 text-center font-nunito font-bold text-[32px] leading-[43.65px] text-white">
@@ -33,25 +35,29 @@ const PlaylistGamePage = () => {
                 className="font-lato text-xs font-medium leading-[19.2px] text-white flex items-center gap-2"
               >
                 View all
-                <Image
-                  src={iconRight}
-                  alt=""
-                  className="w-[4px] h-[8px] mr-1"
-                />
+                <div>
+                  <Image
+                    src={iconRight}
+                    alt=""
+                    className="w-[4px] h-[8px] mr-1"
+                  />
+                </div>
               </Link>
             </div>
             <div className="flex flex-wrap gap-4 items-center justify-between">
               {imagesPlaylistGames.map((item, index) => (
-                <Button
+                <button
                   className="hover:opacity-70 transition-opacity"
                   key={index}
                 >
-                  <Image
-                    src={item.src}
-                    alt=""
-                    className="w-full object-cover rounded-[10px]"
-                  />
-                </Button>
+                  <div>
+                    <Image
+                      src={item.src}
+                      alt=""
+                      className="w-full object-cover rounded-[10px]"
+                    />
+                  </div>
+                </button>
               ))}
             </div>
           </div>
@@ -68,25 +74,29 @@ const PlaylistGamePage = () => {
                 className="font-lato text-xs font-medium leading-[19.2px] text-white flex items-center gap-2"
               >
                 Bad Game
-                <Image
-                  src={iconRight}
-                  alt=""
-                  className="w-[4px] h-[8px] mr-1"
-                />
+                <div>
+                  <Image
+                    src={iconRight}
+                    alt=""
+                    className="w-[4px] h-[8px] mr-1"
+                  />
+                </div>
               </Link>
             </div>
             <div className="flex flex-wrap gap-4 items-center justify-between">
               {imagesPlaylistGames.map((item, index) => (
-                <Button
+                <button
                   className="hover:opacity-70 transition-opacity"
                   key={index}
                 >
-                  <Image
-                    src={item.src}
-                    alt=""
-                    className="w-full object-cover rounded-[10px]"
-                  />
-                </Button>
+                  <div>
+                    <Image
+                      src={item.src}
+                      alt=""
+                      className="w-full object-cover rounded-[10px]"
+                    />
+                  </div>
+                </button>
               ))}
             </div>
           </div>
@@ -103,25 +113,29 @@ const PlaylistGamePage = () => {
                 className="font-lato text-xs font-medium leading-[19.2px] text-white flex items-center gap-2"
               >
                 View all
-                <Image
-                  src={iconRight}
-                  alt=""
-                  className="w-[4px] h-[8px] mr-1"
-                />
+                <div>
+                  <Image
+                    src={iconRight}
+                    alt=""
+                    className="w-[4px] h-[8px] mr-1"
+                  />
+                </div>
               </Link>
             </div>
             <div className="flex flex-wrap gap-4 items-center justify-between">
               {imagesPlaylistGames.map((item, index) => (
-                <Button
+                <button
                   className="hover:opacity-70 transition-opacity"
                   key={index}
                 >
-                  <Image
-                    src={item.src}
-                    alt=""
-                    className="w-full object-cover rounded-[10px]"
-                  />
-                </Button>
+                  <div>
+                    <Image
+                      src={item.src}
+                      alt=""
+                      className="w-full object-cover rounded-[10px]"
+                    />
+                  </div>
+                </button>
               ))}
             </div>
           </div>

@@ -40,17 +40,21 @@ const AvatarPunchase = ({ itemsPerPage }: { itemsPerPage: number }) => {
             className="hover:opacity-70 transition-opacity flex justify-between items-center gap-4 pr-[80px]"
             key={index}
           >
-            <Image
-              src={item.src}
-              alt=""
-              className="w-full object-cover rounded-[10px]"
-            />
+            <div>
+              <Image
+                src={item.src}
+                alt=""
+                className="w-full object-cover rounded-[10px]"
+              />
+            </div>
             <div className="flex flex-col gap-1">
               <div className="flex gap-2 items-center">
                 <span className="text-white font-nunito font-black text-[22px]">
                   {item.price}
                 </span>
-                <Image src={priceImage} alt="" />
+                <div>
+                  <Image src={priceImage} alt="" />
+                </div>
               </div>
               <p className="font-nunito font-normal text-white italic text-[8px] whitespace-normal">
                 {item.date}

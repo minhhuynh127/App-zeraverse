@@ -9,26 +9,26 @@ const config: Config = {
   theme: {
     extend: {
       gridTemplateRows: {
-        // Simple 8 row grid
+        // Simple 7 row grid
         "7": "repeat(7, minmax(0, 1fr))",
       },
       gridRow: {
         "span-7": "span 7 / span 7",
       },
-      gridColumnStart: {
-        "13": "13",
-        "14": "14",
-        "15": "15",
-        "16": "16",
-        "17": "17",
-      },
-      gridColumnEnd: {
-        "13": "13",
-        "14": "14",
-        "15": "15",
-        "16": "16",
-        "17": "17",
-      },
+      // gridColumnStart: {
+      //   "13": "13",
+      //   "14": "14",
+      //   "15": "15",
+      //   "16": "16",
+      //   "17": "17",
+      // },
+      // gridColumnEnd: {
+      //   "13": "13",
+      //   "14": "14",
+      //   "15": "15",
+      //   "16": "16",
+      //   "17": "17",
+      // },
       backgroundImage: {
         bgBannerGs: "url(/images/game-screen/bg-banner.png)",
         body: "url(/images/bg-body.png)",
@@ -74,17 +74,29 @@ const config: Config = {
           "0%": { top: "83px", opacity: "0" },
           "100%": { top: "63px", opacity: "1" },
         },
+        bottomToTop: {
+          "0%": { bottom: "-200px", opacity: "0" },
+          "100%": { bottom: "-150px", opacity: "1" },
+        },
         translateFadeIn: {
           "0%": { transform: "translateY(100px)", opacity: "0" },
           "100%": { transform: "translateY(0)", opacity: "1" },
         },
-        modalSearch: {
-          "0%": { transform: "translateX(-200px)", opacity: "0" },
-          "100%": { transform: "translateY(0)", opacity: "1" },
+        openSearch: {
+          "0%": { transform: "translateX(-400px)", opacity: "0" },
+          "100%": { transform: "translateX(0)", opacity: "1" },
+        },
+        closeSearch: {
+          "0%": { transform: "translateX(0)", opacity: "1" },
+          "100%": { transform: "translateX(-400px)", opacity: "0" },
         },
         openCategory: {
-          "0%": { height: "340px" },
-          "100%": { height: "700px" },
+          "0%": { height: "0", opacity: "0" },
+          "100%": { height: "270px", opacity: "1" },
+        },
+        closeCategory: {
+          "0%": { height: "270px" },
+          "100%": { height: "0" },
         },
         opacity: {
           "0%": { opacity: "0" },
@@ -98,10 +110,13 @@ const config: Config = {
       animation: {
         fadeIn: "fadeIn both 0.4s",
         translateFadeIn: "translateFadeIn both 1s",
-        modalSearch: "modalSearch both 1s",
+        openSearch: "openSearch linear 0.4s",
+        closeSearch: "closeSearch linear 0.4s",
         opacity: "opacity linear 1s",
         opacityOut: "opacityOut linear 0.4s",
         openCategory: "openCategory linear 0.4s",
+        closeCategory: "closeCategory linear 0.4s",
+        bottomToTop: "bottomToTop linear 0.4s",
       },
     },
   },

@@ -32,19 +32,25 @@ const GameScreenPage = () => {
       <div className="col-span-7 row-span-7">
         <div className="grid grid-rows-7 gap-4">
           <div className=" row-span-5 col-span-7 w-full h-full">
-            <Image src={banner} alt="" className=" object-cover w-full" />
+            <div>
+              <Image src={banner} alt="" className=" object-cover w-full" />
+            </div>
             <div className="h-[67px] bg-[#373737] w-full flex justify-between items-center p-4">
               <div className="flex gap-4 h-full w-full items-center">
-                <Image
-                  src={pause}
-                  alt=""
-                  className="object-cover w-[32px] h-[32px]"
-                />
-                <Image
-                  src={imgage1}
-                  alt=""
-                  className="object-cover h-[50px] w-[50px]"
-                />
+                <div>
+                  <Image
+                    src={pause}
+                    alt=""
+                    className="object-cover w-[32px] h-[32px]"
+                  />
+                </div>
+                <div>
+                  <Image
+                    src={imgage1}
+                    alt=""
+                    className="object-cover h-[50px] w-[50px]"
+                  />
+                </div>
                 <span className="font-lato font-bold text-base leading[25.6px] text-[#FFFFFF]">
                   Game title
                 </span>
@@ -53,10 +59,18 @@ const GameScreenPage = () => {
                 <span className="w-[110px] h-[29px] rounded-[10px] px-[10px] py-[5px] bg-[#5B5B5B] text-[#FFFFFF] font-semibold font-inter text-base flex justify-center items-center">
                   00 : 00 : 00
                 </span>
-                <Image src={heart} alt="" />
-                <Image src={add} alt="" />
-                <Image src={drag} alt="" />
-                <Image src={report} alt="" />
+                <div>
+                  <Image src={heart} alt="" />
+                </div>
+                <div>
+                  <Image src={add} alt="" />
+                </div>
+                <div>
+                  <Image src={drag} alt="" />
+                </div>
+                <div>
+                  <Image src={report} alt="" />
+                </div>
               </div>
             </div>
           </div>
@@ -104,11 +118,13 @@ const GameScreenPage = () => {
         <div className="grid grid-rows-7 gap-4 w-full h-full">
           <div className="row-span-3 col-span-3  flex flex-col justify-between bg-[#585858]/50">
             <div className="h-8 rounded-[10px] bg-[#52495D] py-2 px-[10px] flex justify-between items-center">
-              <Image
-                src={imgage1}
-                alt=""
-                className="object-cover h-[24px] w-[24px] rounded-[50%]"
-              />
+              <div>
+                <Image
+                  src={imgage1}
+                  alt=""
+                  className="object-cover h-[24px] w-[24px] rounded-[50%]"
+                />
+              </div>
               <span className="font-inter font-normal text-xs leading-[14.52px] text-white">
                 +100 More
               </span>
@@ -249,11 +265,13 @@ const GameScreenPage = () => {
                   key={index}
                   className="flex gap-2 bg-black/50 py-[5px] px-[10px] rounded-[10px]"
                 >
-                  <Image
-                    src={item.src}
-                    alt=""
-                    className="w-[63px] h-[63px] rounded-[130px]"
-                  />
+                  <div>
+                    <Image
+                      src={item.src}
+                      alt=""
+                      className="w-[63px] h-[63px] rounded-[130px]"
+                    />
+                  </div>
                   <div className="flex-1">
                     <h3 className="font-lato font-bold text-base leading-[25.6px] text-white">
                       Username
@@ -268,7 +286,9 @@ const GameScreenPage = () => {
                     <span className="text-white font-nunito font-bold text-[14px] leading-[22.4px]">
                       1000
                     </span>
-                    <Image src={zen} alt="" className="object-cover" />
+                    <div>
+                      <Image src={zen} alt="" className="object-cover" />
+                    </div>
                   </div>
                 </div>
               ))}

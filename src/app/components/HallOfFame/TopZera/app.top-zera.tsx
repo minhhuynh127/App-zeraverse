@@ -46,17 +46,23 @@ const TopZera = ({
       <div className="flex gap-[30px] justify-center py-[50px] px-[60px] animate-translateFadeIn transition-all">
         <div className="relative flex flex-col-reverse gap-[10px] bg-black-300/80 w-[233px] h-[314px] mt-16">
           <div className="absolute top-0 left-[50%] translate-x-[-50%] flex flex-col justify-center items-center gap-4 z-10">
-            <Image src={avatar1} alt="" />
+            <div>
+              <Image src={avatar1} alt="" />
+            </div>
             <h3 className=" font-lato font-medium text-base leading-[25.6px] text-white">
               Hugn000
             </h3>
-            <Image src={silvar} alt="" />
+            <div>
+              <Image src={silvar} alt="" />
+            </div>
             <div className="flex gap-4 items-center">
-              <Image
-                src={zeraCoin}
-                alt=""
-                className="w-[29px] h-[29px] object-cover"
-              />
+              <div>
+                <Image
+                  src={zeraCoin}
+                  alt=""
+                  className="w-[29px] h-[29px] object-cover"
+                />
+              </div>
               <div className="flex flex-col justify-center items-center">
                 <span className="font-lato font-bold text-[28px] text-white">
                   10000
@@ -96,17 +102,23 @@ const TopZera = ({
         </div>
         <div className="relative flex flex-col-reverse gap-[10px] bg-black-300/80 w-[233px] h-[314px] mt-16">
           <div className="absolute top-0 left-[50%] translate-x-[-50%] flex flex-col justify-center items-center gap-4 z-10">
-            <Image src={avatar3} alt="" />
+            <div>
+              <Image src={avatar3} alt="" />
+            </div>
             <h3 className=" font-lato font-medium text-base leading-[25.6px] text-white">
               Hugn000
             </h3>
-            <Image src={bronze} alt="" />
+            <div>
+              <Image src={bronze} alt="" />
+            </div>
             <div className="flex gap-4 items-center">
-              <Image
-                src={zeraCoin}
-                alt=""
-                className="w-[29px] h-[29px] object-cover"
-              />
+              <div>
+                <Image
+                  src={zeraCoin}
+                  alt=""
+                  className="w-[29px] h-[29px] object-cover"
+                />
+              </div>
               <div className="flex flex-col justify-center items-center">
                 <span className="font-lato font-bold text-[28px] text-white">
                   10000

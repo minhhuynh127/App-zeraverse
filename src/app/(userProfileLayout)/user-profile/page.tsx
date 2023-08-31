@@ -1,3 +1,4 @@
+"use client";
 import imageMostPlayed from "@/public/images/games/image 25.png";
 import iconRight from "@/public/right.png";
 import {
@@ -8,8 +9,13 @@ import {
 } from "@/src/app/(userProfileLayout)/user-profile/data/images";
 import Image from "next/image";
 import Link from "next/link";
-import Button from "../../components/Buttons/app.button";
+import { userContext } from "@/src/app/(userProfileLayout)/layout";
+import { useContext } from "react";
+
 const UserProfilePage = () => {
+  const userProfile = useContext(userContext);
+  console.log(userProfile);
+
   return (
     <div className="mt-28 w-full h-auto flex items-start gap-[18px]">
       <div className="w-[40%] flex flex-col gap-4">
@@ -124,7 +130,9 @@ const UserProfilePage = () => {
               <h3 className="font-lato font-bold text-2xl leading-[39.2px] text-white">
                 Most Played
               </h3>
-              <Image src={imageMostPlayed} alt="" />
+              <div>
+                <Image src={imageMostPlayed} alt="" />
+              </div>
             </div>
             {/* Recent Games */}
             <div className="w-full flex flex-col gap-10">
@@ -138,25 +146,29 @@ const UserProfilePage = () => {
                     className="font-lato text-xs font-medium leading-[19.2px] text-white flex items-center gap-2"
                   >
                     View all{" "}
-                    <Image
-                      src={iconRight}
-                      alt=""
-                      className="w-[4px] h-[8px] mr-1"
-                    />
+                    <div>
+                      <Image
+                        src={iconRight}
+                        alt=""
+                        className="w-[4px] h-[8px] mr-1"
+                      />
+                    </div>
                   </Link>
                 </div>
                 <div className="flex gap-8 items-center">
                   {imagesRecentGame.map((item, index) => (
-                    <Button
+                    <button
                       className="hover:opacity-70 transition-opacity"
                       key={index}
                     >
-                      <Image
-                        src={item.src}
-                        alt=""
-                        className="w-full object-cover rounded-[10px]"
-                      />
-                    </Button>
+                      <div>
+                        <Image
+                          src={item.src}
+                          alt=""
+                          className="w-full object-cover rounded-[10px]"
+                        />
+                      </div>
+                    </button>
                   ))}
                 </div>
               </div>
@@ -173,25 +185,29 @@ const UserProfilePage = () => {
                     className="font-lato text-xs font-medium leading-[19.2px] text-white flex items-center gap-2"
                   >
                     View all
-                    <Image
-                      src={iconRight}
-                      alt=""
-                      className="w-[4px] h-[8px] mr-1"
-                    />
+                    <div>
+                      <Image
+                        src={iconRight}
+                        alt=""
+                        className="w-[4px] h-[8px] mr-1"
+                      />
+                    </div>
                   </Link>
                 </div>
                 <div className="flex gap-8 items-center">
                   {imagesRecentGame.map((item, index) => (
-                    <Button
+                    <button
                       className="hover:opacity-70 transition-opacity"
                       key={index}
                     >
-                      <Image
-                        src={item.src}
-                        alt=""
-                        className="w-full object-cover rounded-[10px]"
-                      />
-                    </Button>
+                      <div>
+                        <Image
+                          src={item.src}
+                          alt=""
+                          className="w-full object-cover rounded-[10px]"
+                        />
+                      </div>
+                    </button>
                   ))}
                 </div>
               </div>
@@ -208,11 +224,13 @@ const UserProfilePage = () => {
                     className="font-lato text-xs font-medium leading-[19.2px] text-white flex items-center gap-2"
                   >
                     View all
-                    <Image
-                      src={iconRight}
-                      alt=""
-                      className="w-[4px] h-[8px] mr-1"
-                    />
+                    <div>
+                      <Image
+                        src={iconRight}
+                        alt=""
+                        className="w-[4px] h-[8px] mr-1"
+                      />
+                    </div>
                   </Link>
                 </div>
                 <div className="flex gap-8 items-center">
@@ -221,11 +239,13 @@ const UserProfilePage = () => {
                       className=" flex justify-between rounded-[10px] items-center w-[204px] h-[94px] border-t-[3px] border-r-[3px] border-b-[3px] border-l-0 border-pink-400 pr-2"
                       key={index}
                     >
-                      <Image
-                        src={item.src}
-                        alt=""
-                        className="object-cover rounded-[10px]"
-                      />
+                      <div>
+                        <Image
+                          src={item.src}
+                          alt=""
+                          className="object-cover rounded-[10px]"
+                        />
+                      </div>
                       <div className="flex flex-col gap-2 justify-center items-center">
                         <h3 className="font-lato font-bold text-xl text-white leading-[28px]">
                           Bad game
@@ -235,11 +255,13 @@ const UserProfilePage = () => {
                           className="hover:opacity-70 transition-opacity font-lato text-xs font-medium leading-[19.2px] text-white flex items-center gap-2"
                         >
                           View all
-                          <Image
-                            src={iconRight}
-                            alt=""
-                            className="w-[4px] h-[8px] mr-1"
-                          />
+                          <div>
+                            <Image
+                              src={iconRight}
+                              alt=""
+                              className="w-[4px] h-[8px] mr-1"
+                            />
+                          </div>
                         </Link>
                       </div>
                     </div>
@@ -259,33 +281,39 @@ const UserProfilePage = () => {
                     className="font-lato text-xs font-medium leading-[19.2px] text-white flex items-center gap-2"
                   >
                     View all
-                    <Image
-                      src={iconRight}
-                      alt=""
-                      className="w-[4px] h-[8px] mr-1"
-                    />
+                    <div>
+                      <Image
+                        src={iconRight}
+                        alt=""
+                        className="w-[4px] h-[8px] mr-1"
+                      />
+                    </div>
                   </Link>
                 </div>
                 <div className="flex gap-8 items-center">
                   {imageAvatar.map((item, index) => (
-                    <Button className="" key={index}>
-                      <Image
-                        src={item.src}
-                        alt=""
-                        className="object-cover rounded-[10px]"
-                      />
-                    </Button>
+                    <button className="" key={index}>
+                      <div>
+                        <Image
+                          src={item.src}
+                          alt=""
+                          className="object-cover rounded-[10px]"
+                        />
+                      </div>
+                    </button>
                   ))}
                 </div>
                 <div className="flex gap-8 items-center">
                   {bgBrofile.map((item, index) => (
-                    <Button className="" key={index}>
-                      <Image
-                        src={item.src}
-                        alt=""
-                        className="object-cover rounded-[10px]"
-                      />
-                    </Button>
+                    <button className="" key={index}>
+                      <div>
+                        <Image
+                          src={item.src}
+                          alt=""
+                          className="object-cover rounded-[10px]"
+                        />
+                      </div>
+                    </button>
                   ))}
                 </div>
               </div>

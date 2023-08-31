@@ -6,16 +6,18 @@ const RecentGame = () => {
   return (
     <div className="grid grid-cols-10 gap-4">
       {imagesRecentGame.map((item, index) => (
-        <Button
+        <button
           className="col-span-1 hover:opacity-70 transition-opacity"
           key={index}
         >
-          <Image
-            src={item.src}
-            alt=""
-            className="w-full object-cover rounded-[10px]"
-          />
-        </Button>
+          <div>
+            <Image
+              src={item.src}
+              alt=""
+              className="w-full object-cover rounded-[10px]"
+            />
+          </div>
+        </button>
       ))}
     </div>
   );

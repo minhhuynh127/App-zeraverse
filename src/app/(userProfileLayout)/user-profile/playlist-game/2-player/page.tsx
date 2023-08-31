@@ -11,7 +11,7 @@ const PlaylistGameTwoPlayerPage = () => {
   const showMenuDel = () => {
     setOpenDel(!openDel);
   };
-  const [acceptDel, setacceptDel] = useState<boolean>(true);
+  const [acceptDel, setacceptDel] = useState<boolean>(false);
 
   const hadleDel = () => {
     setacceptDel(!acceptDel);
@@ -24,7 +24,9 @@ const PlaylistGameTwoPlayerPage = () => {
             href={"/user-profile/playlist-game"}
             className="flex justify-center items-center text-white gap-[5px] w-[41px] h-[22px]"
           >
-            <Image src={iconBack} alt="" className="w-[5px] h-[10px]" />
+            <div>
+              <Image src={iconBack} alt="" className="w-[5px] h-[10px]" />
+            </div>
             Back
           </Link>
           <h3 className="flex-1 text-center font-nunito font-bold text-[32px] leading-[43.65px] text-white">
@@ -66,11 +68,13 @@ const PlaylistGameTwoPlayerPage = () => {
                   className="hover:opacity-70 transition-opacity relative"
                   key={index}
                 >
-                  <Image
-                    src={item.src}
-                    alt=""
-                    className="w-full object-cover rounded-[10px]"
-                  />
+                  <div>
+                    <Image
+                      src={item.src}
+                      alt=""
+                      className="w-full object-cover rounded-[10px]"
+                    />
+                  </div>
                   {acceptDel && (
                     <span
                       className={`absolute w-full h-full bg-black/70 top-0 left-0 flex justify-end items-start text-white animate-opacity transition-opacity ${acceptDel} ? "block" : "hidden"`}

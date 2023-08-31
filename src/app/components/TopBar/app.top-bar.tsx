@@ -1,14 +1,15 @@
 "use client";
 import logoTopbar from "@/public/images/logos/logo_02.png";
+import userImage from "@/public/images/user-images/user-image-1.png.png";
 import Category from "@/src/app/components/Category/CategoryTopBar/app.category";
 import localFont from "next/font/local";
 import Image from "next/image";
 import Link from "next/link";
-import { useState, useRef } from "react";
+import { useState } from "react";
 import Button from "../Buttons/app.button";
 import SearchModal from "../SearchModal/app.search-modal";
+import SubUserMenu from "../SubUserMenu/app.sub-user-menu";
 import TopBarLogin from "../TopBarLogin/app.tap-bar-login";
-import userImage from "@/public/images/user-images/user-image-1.png.png";
 
 // Font files can be colocated inside of `app`
 const myFont = localFont({
@@ -17,13 +18,28 @@ const myFont = localFont({
 });
 
 const TopBar = () => {
-  const check: boolean = false;
-  // Open menu
+  let check: boolean = false;
+
+  // localStorage
+  let username: string = "";
+  const ISSERVER = typeof window === "undefined";
+  if (!ISSERVER) {
+    const userData: any = localStorage.getItem("userData");
+    const userLogin = JSON.parse(userData)?.data;
+    if (userLogin) check = true;
+    username = userLogin?.username;
+  }
+
+  // Open Category
   const [open, setOpen] = useState<boolean>(false);
   const hadleShowCategory = () => {
     setOpen(!open);
   };
-
+  // Username Menu
+  const [openUserMenu, setOpenUserMenu] = useState<boolean>(false);
+  const hadleOpenUserMenu = () => {
+    setOpenUserMenu(!openUserMenu);
+  };
   // Search
   const [isSearch, setIsSearch] = useState<boolean>(false);
   const hadleSearch = () => {
@@ -31,16 +47,20 @@ const TopBar = () => {
   };
   return (
     <div className="flex flex-col gap-4">
-      <div className="bg-top-bar object-cover w-[204px] ml-[11px] rounded-[20px] flex flex-col items-center px-[20px] py-[11px] box-border">
-        <Image
-          src={logoTopbar}
-          alt="logo top bar"
-          className="max-w-[134px] max-h-[72px] mt-[10px]"
-        />
+      <div className="bg-top-bar object-cover w-[204px] ml-[11px] rounded-[20px] flex flex-col items-center px-[20px] py-[11px] box-border ">
+        <Link href={"/"}>
+          <div>
+            <Image
+              src={logoTopbar}
+              alt="logo top bar"
+              className="max-w-[134px] max-h-[72px] mt-[10px]"
+            />
+          </div>
+        </Link>
         <ul className="flex justify-between items-center gap-4 mt-[3px] py-[7px] px-[5.25px]">
           {/* Category */}
           <li className="relative">
-            <button onClick={() => hadleShowCategory()}>
+            <a onClick={() => hadleShowCategory()}>
               <svg
                 width="42"
                 height="42"
@@ -57,7 +77,7 @@ const TopBar = () => {
                   fill="#C4B5FD"
                 />
               </svg>
-            </button>
+            </a>
           </li>
           {/* Article */}
           <li>
@@ -78,7 +98,10 @@ const TopBar = () => {
           </li>
           {/* Search */}
           <li>
-            <button onClick={() => hadleSearch()}>
+            <button
+              onClick={() => hadleSearch()}
+              className="flex justify-center items-center"
+            >
               <svg
                 width="30"
                 height="30"
@@ -91,26 +114,49 @@ const TopBar = () => {
                   fill="#C4B5FD"
                 />
               </svg>
+
               {isSearch && (
-                <SearchModal className="" click={() => hadleSearch()} />
+                <SearchModal
+                  className={`${
+                    isSearch
+                      ? "translate-x-0 animate-openSearch visible"
+                      : " translate-x-[-400px] !animate-closeSearch hidden"
+                  }`}
+                  click={() => hadleSearch()}
+                />
               )}
             </button>
           </li>
         </ul>
 
         <span className="w-full h-[2px] bg-[#8657FF] mt-4"></span>
-        {open && <Category className={`${open} ? "block" : "hidden"`} />}
 
-        {open && <span className="w-full h-[2px] bg-[#8657FF] mt-4"></span>}
+        {/* Category */}
+        <Category
+          className={`${
+            open
+              ? "h-[270px] visible animate-openCategory"
+              : "h-0 !animate-closeCategory"
+          } `}
+        />
+
+        {/* {open && <span className="w-full h-[2px] bg-[#8657FF] mt-4"></span>} */}
         {/* user login */}
         {check && (
-          <div className="flex flex-col justify-center items-center mt-[18px]">
+          <div
+            className="flex flex-col justify-center items-center mt-[18px] relative"
+            onClick={() => hadleOpenUserMenu()}
+          >
             <div>
               <Image src={userImage} alt="" />
             </div>
             <span className="font-lato font-medium text-base leading-[25.6px] tracking-[.2%] text-[#FFFFFF]">
-              Username
+              {username ? username : "Username"}
             </span>
+
+            {openUserMenu && (
+              <SubUserMenu className={`${openUserMenu} ? "block" : "hidden"`} />
+            )}
           </div>
         )}
 
@@ -118,9 +164,9 @@ const TopBar = () => {
           <div className="flex flex-col justify-between items-center mt-[18px]">
             <div className="flex flex-col justify-between items-center">
               <Link href={"/login"}>
-                <Button className="flex justify-center items-center w-[125px] h-9 rounded-[10px] font-nunito font-semibold text-base tracking-[0.2%] text-center leading-[25.6px] bg-gradient-to-tl from-[#AF1BA0] via-#BB37AE to-[#4341D1] text-[#FFFFFF] hover:opacity-70 transition-opacity">
+                <button className="flex justify-center items-center w-[125px] h-9 rounded-[10px] font-nunito font-semibold text-base tracking-[0.2%] text-center leading-[25.6px] bg-gradient-to-tl from-[#AF1BA0] via-#BB37AE to-[#4341D1] text-[#FFFFFF] hover:opacity-70 transition-opacity">
                   Login
-                </Button>
+                </button>
               </Link>
               <Link
                 href={"/register"}

@@ -9,7 +9,9 @@ const TrendingNew = () => {
       </h3>
       <div className="flex items-center justify-center gap-[20px] mt-2">
         <div className="flex items-center bg-black gap-4 p-[2px] border border-pink-700">
-          <Image src={trengdingNew} alt="" className="rounded-[10px]" />
+          <div>
+            <Image src={trengdingNew} alt="" className="rounded-[10px]" />
+          </div>
           <div className="flex flex-col justify-center items-start gap-2">
             <h3 className="font-lato font-bold text-2xl text-white">
               The unseen of spending three years at Pixelgrade
@@ -23,7 +25,9 @@ const TrendingNew = () => {
           </div>
         </div>
         <div className="flex items-center bg-black gap-4 p-[2px] border border-pink-700">
-          <Image src={trengdingNew} alt="" className="rounded-[10px]" />
+          <div>
+            <Image src={trengdingNew} alt="" className="rounded-[10px]" />
+          </div>
           <div className="flex flex-col justify-center items-start gap-2">
             <h3 className="font-lato font-bold text-2xl text-white">
               The unseen of spending three years at Pixelgrade

@@ -55,7 +55,9 @@ const TopBarLogin = () => {
             key={index}
             className="flex flex-col justify-center items-center gap-2"
           >
-            <Image src={image.src} alt="" className="w-[80px] h-[80px]" />
+            <div>
+              <Image src={image.src} alt="" className="" />
+            </div>
             <div className="flex justify-center items-center gap-2">
               <span className="text-white">79</span>
 

@@ -13,7 +13,7 @@ const SearchModal = ({
 }) => {
   return (
     <div
-      className={`${className} fixed inset-0 bg-black/50 w-full h-full z-50 transition-all animate-modalSearch`}
+      className={`${className} fixed inset-0 bg-black/50 w-full h-full z-50 transition-transform `}
     >
       <div
         className="bg-[#C4B5FD]/50 pl-[27px] pr-[59px] w-[740px] h-auto py-[20px] relative"
@@ -73,23 +73,63 @@ const SearchModal = ({
             />
           </svg>
         </div>
-        <div className="flex gap-4">
-          <Button className="text-black bg-gradient-to-l from-[#FFFFFF] via-#7270FF to-[#000]/20 py-2 px-[20px] rounded-tr-[20px] rounded-br-[20px] mt-4 font-nunito text-xs font-bold leading-[16.37px]">
-            CAR GAME
-          </Button>
-          <Button className="text-black bg-white py-2 px-[20px] rounded-[20px] mt-4 font-nunito text-xs font-bold leading-[16.37px]">
-            .IO GAME
-          </Button>
-          <Button className="text-black bg-white py-2 px-[20px] rounded-[20px] mt-4 font-nunito text-xs font-bold leading-[16.37px]">
-            GAME FOR GIRL
-          </Button>
-          <Button className="text-black bg-white py-2 px-[20px] rounded-[20px] mt-4 font-nunito text-xs font-bold leading-[16.37px]">
-            SHOOTING GAME
-          </Button>
-          <Button className="text-black bg-white py-2 px-[20px] rounded-[20px] mt-4 font-nunito text-xs font-bold leading-[16.37px]">
-            2 PLAYER
-          </Button>
-        </div>
+        <ul className="flex gap-4 max-w-full no-scrollbar overflow-x-scroll btn-list cursor-grab pl-0">
+          <li>
+            <Button className="text-black bg-gradient-to-l from-[#FFFFFF] via-#7270FF to-[#000]/20 py-2 px-[20px] rounded-tr-[20px] rounded-br-[20px] mt-4 font-nunito text-xs font-bold leading-[16.37px] whitespace-nowrap cursor-grab">
+              CAR GAME
+            </Button>
+          </li>
+          <li>
+            <Button className="text-black bg-white py-2 px-[20px] rounded-[20px] mt-4 font-nunito text-xs font-bold leading-[16.37px] whitespace-nowrap cursor-grab">
+              .IO GAME
+            </Button>
+          </li>
+          <li>
+            <Button className="text-black bg-white py-2 px-[20px] rounded-[20px] mt-4 font-nunito text-xs font-bold leading-[16.37px] whitespace-nowrap cursor-grab">
+              GAME FOR GIRL
+            </Button>
+          </li>
+          <li>
+            <Button className="text-black bg-white py-2 px-[20px] rounded-[20px] mt-4 font-nunito text-xs font-bold leading-[16.37px] whitespace-nowrap cursor-grab">
+              SHOOTING GAME
+            </Button>
+          </li>
+          <li>
+            <Button className="text-black bg-white py-2 px-[20px] rounded-[20px] mt-4 font-nunito text-xs font-bold leading-[16.37px] whitespace-nowrap cursor-grab">
+              2 PLAYER
+            </Button>
+          </li>
+          <li>
+            <Button className="text-black bg-white py-2 px-[20px] rounded-[20px] mt-4 font-nunito text-xs font-bold leading-[16.37px] whitespace-nowrap cursor-grab">
+              2 PLAYER
+            </Button>
+          </li>
+          <li>
+            <Button className="text-black bg-white py-2 px-[20px] rounded-[20px] mt-4 font-nunito text-xs font-bold leading-[16.37px] whitespace-nowrap cursor-grab">
+              2 PLAYER
+            </Button>
+          </li>
+          <li>
+            <Button className="text-black bg-white py-2 px-[20px] rounded-[20px] mt-4 font-nunito text-xs font-bold leading-[16.37px] whitespace-nowrap cursor-grab">
+              2 PLAYER
+            </Button>
+          </li>
+          <li>
+            <Button className="text-black bg-white py-2 px-[20px] rounded-[20px] mt-4 font-nunito text-xs font-bold leading-[16.37px] whitespace-nowrap cursor-grab">
+              2 PLAYER
+            </Button>
+          </li>
+          <li>
+            <Button className="text-black bg-white py-2 px-[20px] rounded-[20px] mt-4 font-nunito text-xs font-bold leading-[16.37px] whitespace-nowrap cursor-grab">
+              2 PLAYER
+            </Button>
+          </li>
+          <li>
+            <Button className="text-black bg-white py-2 px-[20px] rounded-[20px] mt-4 font-nunito text-xs font-bold leading-[16.37px] whitespace-nowrap cursor-grab">
+              2 PLAYER
+            </Button>
+          </li>
+        </ul>
         <div className="flex flex-col gap-4 items-start mt-[21px]">
           <h3 className="text-white text-2xl font-bold leading-[32.74px] font-nunito">
             Popular this week

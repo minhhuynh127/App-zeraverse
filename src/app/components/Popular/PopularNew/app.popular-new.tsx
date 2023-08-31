@@ -10,7 +10,13 @@ const PopularNew = () => {
       </h3>
       <div className="flex w-full h-[424px] gap-[20px] mt-4">
         <div className="max-w-[804px] w-full relative ">
-          <Image src={popular1} alt="" className="w-full h-full object-cover" />
+          <div>
+            <Image
+              src={popular1}
+              alt=""
+              className="w-full h-full object-cover"
+            />
+          </div>
           <div className="absolute w-full h-full flex flex-col justify-end p-2 left-0 bottom-0 bg-gradient-to-b from-transparent to-black/90">
             <h3 className="font-lato font-bold text-[28px] leading-[39.2px] text-white">
               The unseen of spending three years at Pixelgrade
@@ -25,7 +31,13 @@ const PopularNew = () => {
           </div>
         </div>
         <div className="max-w-[354px] w-full p-1 border border-pink-700 bg-black relative">
-          <Image src={popular2} alt="" className="w-full h-full object-cover" />
+          <div>
+            <Image
+              src={popular2}
+              alt=""
+              className="w-full h-full object-cover"
+            />
+          </div>
           <div className="absolute w-full h-[40%] flex flex-col justify-end p-2 left-0 bottom-0 bg-black">
             <h3 className="font-lato font-bold text-[28px] leading-[39.2px] text-white">
               The unseen of spending three years at Pixelgrade
