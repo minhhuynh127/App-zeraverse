@@ -1,9 +1,10 @@
 "use client";
 import type { Metadata } from "next";
-import { SessionProvider } from "next-auth/react";
 import { Inter, Lato, Nunito } from "next/font/google";
 import { useEffect } from "react";
 import "./globals.css";
+import { SessionProvider } from "next-auth/react";
+import { AuthContextProvider } from "./context/AuthProvider";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -52,9 +53,11 @@ export default function RootLayout({
         className="bg-body object-cover bg-cover"
         suppressHydrationWarning={true}
       >
-        <div className="w-full ">
-          <SessionProvider>{children}</SessionProvider>
-        </div>
+        <AuthContextProvider>
+          <SessionProvider>
+            <div className="w-full ">{children}</div>
+          </SessionProvider>
+        </AuthContextProvider>
         {/* <Script src="../../node_modules/tw-elements/dist/js/tw-elements.umd.min.js" /> */}
       </body>
     </html>

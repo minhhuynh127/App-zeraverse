@@ -9,7 +9,7 @@ const PopularNew = () => {
         Popular News
       </h3>
       <div className="flex w-full h-[424px] gap-[20px] mt-4">
-        <div className="max-w-[804px] w-full relative ">
+        <div className="max-w-full w-[70%] relative overflow-hidden rounded-[10px]">
           <div>
             <Image
               src={popular1}
@@ -17,7 +17,7 @@ const PopularNew = () => {
               className="w-full h-full object-cover"
             />
           </div>
-          <div className="absolute w-full h-full flex flex-col justify-end p-2 left-0 bottom-0 bg-gradient-to-b from-transparent to-black/90">
+          <div className="absolute w-full h-full flex flex-col justify-end pl-4 pb-4 left-0 bottom-0 bg-gradient-to-b from-black/20 to-black/90">
             <h3 className="font-lato font-bold text-[28px] leading-[39.2px] text-white">
               The unseen of spending three years at Pixelgrade
             </h3>
@@ -30,15 +30,15 @@ const PopularNew = () => {
             </span>
           </div>
         </div>
-        <div className="max-w-[354px] w-full p-1 border border-pink-700 bg-black relative">
+        <div className="flex-1 w-full p-1 border border-pink-700 bg-black relative rounded-[10px]">
           <div>
             <Image
               src={popular2}
               alt=""
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover rounded-[10px]"
             />
           </div>
-          <div className="absolute w-full h-[40%] flex flex-col justify-end p-2 left-0 bottom-0 bg-black">
+          <div className="absolute w-full h-[40%] flex flex-col justify-end p-2 left-0 bottom-0 bg-black rounded-bl-[10px] rounded-br-[10px]">
             <h3 className="font-lato font-bold text-[28px] leading-[39.2px] text-white">
               The unseen of spending three years at Pixelgrade
             </h3>

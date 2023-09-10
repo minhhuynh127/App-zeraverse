@@ -1,6 +1,6 @@
 "use client";
-import React from "react";
 import { signIn } from "next-auth/react";
+import { memo } from "react";
 
 const ButtonFacebook = () => {
   return (
@@ -39,4 +39,4 @@ const ButtonFacebook = () => {
   );
 };
 
-export default ButtonFacebook;
+export default memo(ButtonFacebook);

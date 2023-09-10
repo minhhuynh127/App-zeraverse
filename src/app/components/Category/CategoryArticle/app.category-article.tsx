@@ -1,33 +1,15 @@
 "use client";
+import { useAuthContext } from "@/src/app/context/AuthProvider";
 import Image from "next/image";
-import Button from "../../Buttons/app.button";
-import { imagesCategory } from "./images";
+import { memo, useState } from "react";
 import ReactPaginate from "react-paginate";
-import { useEffect, useState } from "react";
+import Button from "../../Buttons/app.button";
 
 const CategoryArticle = ({ itemsPerPage }: { itemsPerPage: number }) => {
-  const [dataArticle, setDataarticle] = useState<any[]>([]);
-  useEffect(() => {
-    fetch("https://user-api.zeraverse.io/api/v1/article/newest")
-      .then((response) => {
-        // Check if the response status is OK (status code 200)
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        // Parse the JSON response
-        return response.json();
-      })
-      .then((article) => {
-        setDataarticle(article.data.rows);
-      })
-      .catch((error) => {
-        // Handle errors here
-        console.error("Error:", error);
-      });
-  }, []);
-  // console.log(dataArticle);
+  const { dataArticles } = useAuthContext();
+  // console.log(dataArticles);
 
-  const items = [...dataArticle];
+  const items = [...dataArticles];
   // Here we use item offsets; we could also use page offsets
   // following the API or data you're working with.
   const [itemOffset, setItemOffset] = useState(0);
@@ -50,11 +32,11 @@ const CategoryArticle = ({ itemsPerPage }: { itemsPerPage: number }) => {
   };
   return (
     <>
-      <div className="grid grid-cols-11 grid-flow-dense gap-4">
+      <div className="flex flex-wrap gap-4 w-full">
         {currentItems.map((article, index) => (
           <div
             key={index}
-            className="h-[250px] max-h-full flex items-center bg-gradient-to-br from-[#89F8FF]/25 via-[#FFA5EB]/25 to-[#FFF59E]/25 p-1 rounded-[20px] col-span-5 row-span-1 gap-4 border border-pink-700"
+            className="w-[49%] max-w-full h-[250px] max-h-full flex items-center bg-gradient-to-br from-[#89F8FF]/25 via-[#FFA5EB]/25 to-[#FFF59E]/25 p-1 rounded-[20px] col-span-5 row-span-1 gap-4 border border-pink-700"
           >
             <Image
               src={article.featured_image}
@@ -106,4 +88,4 @@ const CategoryArticle = ({ itemsPerPage }: { itemsPerPage: number }) => {
   );
 };
 
-export default CategoryArticle;
+export default memo(CategoryArticle);

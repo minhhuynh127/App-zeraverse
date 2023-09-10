@@ -1,27 +1,9 @@
 "use client";
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
-
+import { useEffect, useRef } from "react";
+import { useAuthContext } from "../../context/AuthProvider";
 const Game = () => {
-  const [dataGames, setDataGames] = useState<any[]>([]);
-  useEffect(() => {
-    fetch(`https://user-api.zeraverse.io/api/v1/game?page=1&limit=105`)
-      .then((response) => {
-        // Check if the response status is OK (status code 200)
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        // Parse the JSON response
-        return response.json();
-      })
-      .then((games) => {
-        setDataGames(games.data.rows);
-      })
-      .catch((error) => {
-        // Handle errors here
-        console.error("Error:", error);
-      });
-  }, []);
+  const { dataGames }: { dataGames: Array<any> } = useAuthContext();
 
   const parentRef = useRef<HTMLDivElement | null>(null);
   const itemRef = useRef<HTMLButtonElement[]>([]);
@@ -59,9 +41,9 @@ const Game = () => {
         ref={parentRef}
         className="w-full grid grid-cols-11 grid-flow-dense gap-4"
       >
-        {dataGames.map((game, index) => (
+        {dataGames?.map((game, index) => (
           <button
-            className="hover:opacity-70 transition-all hover:scale-105"
+            className="w-full h-full rounded-xl hover:opacity-70 transition-all hover:scale-105 shine-effect"
             key={index}
           >
             <Image

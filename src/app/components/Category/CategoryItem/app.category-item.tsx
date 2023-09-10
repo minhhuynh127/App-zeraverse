@@ -1,28 +1,10 @@
+"use client";
+import { useAuthContext } from "@/src/app/context/AuthProvider";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 const CategoryItem = () => {
-  const [dataCategory, setData] = useState<any[]>([]);
-  useEffect(() => {
-    fetch(
-      `https://user-api.zeraverse.io/api/v1/game/categories?page=1&limit=40`
-    )
-      .then((response) => {
-        // Check if the response status is OK (status code 200)
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        // Parse the JSON response
-        return response.json();
-      })
-      .then((categories) => {
-        setData(categories.data);
-      })
-      .catch((error) => {
-        // Handle errors here
-        console.error("Error:", error);
-      });
-  }, []);
+  const { dataCategories }: { dataCategories: Array<any> } = useAuthContext();
 
   const parentRef = useRef<HTMLDivElement | null>(null);
   const itemRef = useRef<HTMLDivElement[]>([]);
@@ -61,27 +43,25 @@ const CategoryItem = () => {
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [itemRef.current]);
-  if (dataCategory === null) {
-    return <div className="text-[40px] text-red-400">Loading...</div>;
-  }
+
   return (
     <div
       ref={parentRef}
       className="w-full grid grid-cols-11 grid-flow-dense gap-4"
     >
-      {dataCategory?.map((cate, index) => (
+      {dataCategories?.map((cate, index) => (
         <div
           key={index}
           className="flex justify-center items-center bg-white rounded-[10px] col-span-2 gap-2 overflow-hidden"
         >
-          <div className="w-[50%] h-full rounded-tl-[10px] rounded-bl-[10px]">
+          <div className="w-[50%] h-full rounded-tl-[10px] rounded-bl-[10px] overflow-hidden">
             <Image
               ref={imageRef}
               width={500}
               height={500}
               src={cate?.thumbnail}
               alt="catePicture"
-              className={`w-full h-full ${index}`}
+              className={`w-full h-full ${index} hover:scale-110 transition-all`}
             />
           </div>
 

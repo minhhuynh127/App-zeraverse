@@ -2,14 +2,15 @@
 import logoTopbar from "@/public/images/logos/logo_02.png";
 import userImage from "@/public/images/user-images/user-image-1.png.png";
 import Category from "@/src/app/components/Category/CategoryTopBar/app.category";
+import { useSession } from "next-auth/react";
 import localFont from "next/font/local";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
-import Button from "../Buttons/app.button";
+import { useEffect, useState } from "react";
 import SearchModal from "../SearchModal/app.search-modal";
 import SubUserMenu from "../SubUserMenu/app.sub-user-menu";
 import TopBarLogin from "../TopBarLogin/app.tap-bar-login";
+import { useAuthContext } from "../../context/AuthProvider";
 
 // Font files can be colocated inside of `app`
 const myFont = localFont({
@@ -18,18 +19,17 @@ const myFont = localFont({
 });
 
 const TopBar = () => {
-  let check: boolean = false;
-
-  // localStorage
-  let username: string = "";
-  const ISSERVER = typeof window === "undefined";
-  if (!ISSERVER) {
-    const userData: any = localStorage.getItem("userData");
-    const userLogin = JSON.parse(userData)?.data;
-    if (userLogin) check = true;
-    username = userLogin?.username;
-  }
-
+  const { data: session } = useSession();
+  const { username, token, isLoginEmail } = useAuthContext();
+  const [userLoginGoogle, serUserLoginGoogle] = useState<any>({});
+  const [isLoginGoogle, setisLoginGoogle] = useState<boolean>(false);
+  useEffect(() => {
+    if (session && session.user) {
+      setisLoginGoogle(!isLoginGoogle);
+      serUserLoginGoogle(session.user);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   // Open Category
   const [open, setOpen] = useState<boolean>(false);
   const hadleShowCategory = () => {
@@ -45,6 +45,7 @@ const TopBar = () => {
   const hadleSearch = () => {
     setIsSearch(!isSearch);
   };
+
   return (
     <div className="flex flex-col gap-4">
       <div className="bg-top-bar object-cover w-[204px] ml-[11px] rounded-[20px] flex flex-col items-center px-[20px] py-[11px] box-border ">
@@ -60,7 +61,10 @@ const TopBar = () => {
         <ul className="flex justify-between items-center gap-4 mt-[3px] py-[7px] px-[5.25px]">
           {/* Category */}
           <li className="relative">
-            <a onClick={() => hadleShowCategory()}>
+            <button
+              onClick={() => hadleShowCategory()}
+              className="flex items-center justify-center"
+            >
               <svg
                 width="42"
                 height="42"
@@ -77,7 +81,7 @@ const TopBar = () => {
                   fill="#C4B5FD"
                 />
               </svg>
-            </a>
+            </button>
           </li>
           {/* Article */}
           <li>
@@ -142,7 +146,7 @@ const TopBar = () => {
 
         {/* {open && <span className="w-full h-[2px] bg-[#8657FF] mt-4"></span>} */}
         {/* user login */}
-        {check && (
+        {(isLoginEmail || isLoginGoogle) && (
           <div
             className="flex flex-col justify-center items-center mt-[18px] relative"
             onClick={() => hadleOpenUserMenu()}
@@ -151,7 +155,8 @@ const TopBar = () => {
               <Image src={userImage} alt="" />
             </div>
             <span className="font-lato font-medium text-base leading-[25.6px] tracking-[.2%] text-[#FFFFFF]">
-              {username ? username : "Username"}
+              {username ?? username}
+              {userLoginGoogle ? userLoginGoogle?.name : "Username"}
             </span>
 
             {openUserMenu && (
@@ -160,7 +165,7 @@ const TopBar = () => {
           </div>
         )}
 
-        {!check && (
+        {!isLoginEmail && !isLoginGoogle && (
           <div className="flex flex-col justify-between items-center mt-[18px]">
             <div className="flex flex-col justify-between items-center">
               <Link href={"/login"}>
@@ -191,7 +196,7 @@ const TopBar = () => {
           </span>
         </div>
       </div>
-      {check && <TopBarLogin />}
+      {(isLoginEmail || isLoginGoogle) && <TopBarLogin />}
     </div>
   );
 };

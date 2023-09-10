@@ -16,6 +16,7 @@ import imgage15 from "@/public/images/games/image 15.png";
 import imgage16 from "@/public/images/games/image 16.png";
 import imgage17 from "@/public/images/games/image 17.png";
 import imgage18 from "@/public/images/games/image 18.png";
+
 import { StaticImageData } from "next/image";
 export const imagesGame: {
   id: number;

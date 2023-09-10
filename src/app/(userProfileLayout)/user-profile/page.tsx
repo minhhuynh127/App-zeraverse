@@ -9,13 +9,7 @@ import {
 } from "@/src/app/(userProfileLayout)/user-profile/data/images";
 import Image from "next/image";
 import Link from "next/link";
-import { userContext } from "@/src/app/(userProfileLayout)/layout";
-import { useContext } from "react";
-
 const UserProfilePage = () => {
-  const userProfile = useContext(userContext);
-  console.log(userProfile);
-
   return (
     <div className="mt-28 w-full h-auto flex items-start gap-[18px]">
       <div className="w-[40%] flex flex-col gap-4">

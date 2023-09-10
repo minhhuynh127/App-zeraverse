@@ -1,16 +1,18 @@
 "use client";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { slides } from "../../(defaultLayout)/article/images";
 import "tw-elements/dist/css/tw-elements.min.css";
 function CarouselArticle() {
   const [initComplete, setInitComplete] = useState<boolean>(false);
-  const init = async () => {
-    const { Carousel, initTE } = await import("tw-elements");
-    initTE({ Carousel });
-    setInitComplete(true);
-  };
-  init();
+  useEffect(() => {
+    const init = async () => {
+      const { Carousel, initTE } = await import("tw-elements");
+      initTE({ Carousel });
+      setInitComplete(true);
+    };
+    init();
+  }, []);
   return (
     <div className="">
       {/* Carousel */}
@@ -54,6 +56,8 @@ function CarouselArticle() {
                 <div>
                   <Image
                     src={item.src}
+                    width={500}
+                    height={500}
                     alt="image"
                     className="w-full max-h-[537px] rounded-[5px]"
                   />

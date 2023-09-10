@@ -1,45 +1,63 @@
 "use client";
-import logo from "@/public/images/logos/logo_02.png";
 import { yupResolver } from "@hookform/resolvers/yup";
-import Image from "next/image";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { memo, useState } from "react";
+import React, { memo, useState } from "react";
+import logo from "@/public/images/logos/logo_02.png";
+
 import { useForm } from "react-hook-form";
-import { toast } from "react-toastify";
 import * as yup from "yup";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
+
 const schema = yup
   .object({
-    email: yup.string().required("Email is required").email("Invalid email"),
+    username: yup
+      .string()
+      .required("*Please enter your username")
+      .min(5, "*At least 5 characters")
+      .max(64, "*At most 64 characters")
+      .matches(
+        /^[a-zA-z0-9_]{5,64}$/,
+        "*Please enter a username following the rules below"
+      ),
   })
   .required();
-
-const ForgotPasswordPage = () => {
+const CreateUsernamePage = () => {
   const router = useRouter();
+  const [newUsername, setNewUsername] = useState("");
+
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm({
     resolver: yupResolver(schema),
   });
-  const [disable, setDisable] = useState<boolean>(false);
-  const onSubmit = async (data: {}) => {
+
+  const onSubmit = async (data: { username: string }) => {
+    data.username = data.username.toLowerCase();
+    if (!isValid) return;
+    const token = localStorage.getItem("accessTokenTemp");
+
     try {
       const response = await fetch(
-        "https://user-api.zeraverse.io/api/v1/users/forgot-password",
+        "https://user-api.zeraverse.io/api/v1/users/username",
         {
-          method: "POST",
+          method: "PUT",
           headers: {
             "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
           },
-          body: JSON.stringify(data),
+          body: JSON.stringify({ username: newUsername }),
         }
       );
 
       const result = await response.json();
+      // console.log(result);
+
       if (result && result.data) {
-        router.push("/reset-password");
+        // console.log(result.data);
+
         toast.success("🦄 Success...!", {
           position: "top-right",
           autoClose: 3000,
@@ -51,8 +69,6 @@ const ForgotPasswordPage = () => {
           theme: "light",
         });
       }
-
-      setDisable(!disable);
     } catch (error) {
       toast.error("🦄 Error", {
         position: "top-right",
@@ -79,7 +95,7 @@ const ForgotPasswordPage = () => {
           onSubmit={handleSubmit(onSubmit)}
         >
           <h1 className="font-bold fot-lato text-[28px] leading-[39.2px] text-white">
-            Submit to your email
+            Create Username
           </h1>
           <span className="w-full h-[1px] bg-[#8657FF] mt-1 block"></span>
           <div className="flex flex-col gap-1 mt-[25px]">
@@ -87,31 +103,25 @@ const ForgotPasswordPage = () => {
               htmlFor=""
               className="text-white font-lato font-bold text-base leading-[25.6px] tracking-wide"
             >
-              Please enter your email
+              Please enter your username
             </label>
             <input
-              {...register("email", { required: true })}
+              {...register("username")}
               type="text"
+              value={newUsername}
+              onChange={(e) => setNewUsername(e.target.value)}
               className="w-[400px] h-[45px] bg-white rounded-[10px] pl-4 text-purple-700 text-xl"
             />
             <span className="font-nunito font-bold text-pink-700 text-base">
-              {errors.email?.message}
+              {errors.username?.message}
             </span>
           </div>
-
-          <div className="mt-[15px] flex justify-end items-center gap-4 mb-[150px]">
-            <Link
-              href={"/login"}
-              className="w-[130px] h-9 rounded-[30px] px-[30px] py-[5px] font-lato font-bold text-base tracking-[0.2%] leading-[25.6px] bg-white text-back"
-            >
-              Back
-            </Link>
+          <div className="flex justify-end">
             <button
-              {...(disable ? { disabled: true } : {})}
               type="submit"
-              className={`w-[130px] h-9 rounded-[30px] px-[30px] py-[5px] font-lato font-bold text-base tracking-[0.2%] leading-[25.6px] bg-gradient-to-tl from-[#5200FF] via-#7270FF to-[#F265E4] text-[#FFFFFF] hover:opacity-70 transition-opacity disabled:cursor-not-allowed disabled:opacity-70`}
+              className={`w-[130px] h-9 mt-4 text-center rounded-[30px] px-[30px] py-[5px] font-lato font-bold text-base tracking-[0.2%] leading-[25.6px] bg-gradient-to-tl from-[#5200FF] via-#7270FF to-[#F265E4] text-[#FFFFFF] hover:opacity-70 transition-opacity disabled:cursor-not-allowed disabled:opacity-70`}
             >
-              Confirm
+              Create
             </button>
           </div>
         </form>
@@ -120,4 +130,4 @@ const ForgotPasswordPage = () => {
   );
 };
 
-export default memo(ForgotPasswordPage);
+export default memo(CreateUsernamePage);

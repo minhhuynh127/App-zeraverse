@@ -70,6 +70,14 @@ const config: Config = {
       },
 
       keyframes: {
+        backgroundShine: {
+          from: {
+            backgroundPosition: "0 0",
+          },
+          to: {
+            backgroundPosition: "-200% 0",
+          },
+        },
         fadeIn: {
           "0%": { top: "83px", opacity: "0" },
           "100%": { top: "63px", opacity: "1" },
@@ -117,6 +125,7 @@ const config: Config = {
         openCategory: "openCategory linear 0.4s",
         closeCategory: "closeCategory linear 0.4s",
         bottomToTop: "bottomToTop linear 0.4s",
+        backgroundShine: "backgroundShine 2s linear infinite",
       },
     },
   },

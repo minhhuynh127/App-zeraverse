@@ -1,12 +1,23 @@
 "use client";
 import { signOut } from "next-auth/react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
+import { memo } from "react";
 const SubUserMenu = ({ className }: { className: string }) => {
   const router = useRouter();
+  const currentPathname = usePathname();
   const hadleLogOut = () => {
-    localStorage.removeItem("userData");
+    console.log("into logout");
+    localStorage.removeItem("username");
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("userLoginGoogle");
     signOut();
+    console.log(currentPathname);
+    if (currentPathname === "/user-profile") {
+      router.push("/login");
+    } else if (currentPathname === "/") {
+      router.push("/");
+    }
   };
   return (
     <div
@@ -47,7 +58,7 @@ const SubUserMenu = ({ className }: { className: string }) => {
       </Link>
       <span className="h-[1px] w-full bg-violet-400 px-[38px] text-white"></span>
       <button
-        onClick={() => hadleLogOut()}
+        onClick={hadleLogOut}
         className="font-lato font-semibold text-violet-400 text-base leading-[22.4px] text-center hover:text-violet-700  transition-colors"
       >
         LogOut
@@ -56,4 +67,4 @@ const SubUserMenu = ({ className }: { className: string }) => {
   );
 };
 
-export default SubUserMenu;
+export default memo(SubUserMenu);

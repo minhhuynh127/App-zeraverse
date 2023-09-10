@@ -1,10 +1,11 @@
 "use client";
 import { signIn } from "next-auth/react";
+import { memo } from "react";
 
 const ButtonGoogle = () => {
   return (
     <button
-      onClick={() => signIn()}
+      onClick={() => signIn("google")}
       className="w-[189px] h-9 flex justify-around items-center gap-2 py-[8px] px-[20px] rounded-[20px] font-lato font-bold text-base tracking-[0.2%] leading-[25.6px] bg-white"
     >
       <svg
@@ -45,4 +46,4 @@ const ButtonGoogle = () => {
   );
 };
 
-export default ButtonGoogle;
+export default memo(ButtonGoogle);

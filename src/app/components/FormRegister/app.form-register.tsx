@@ -5,7 +5,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { memo, useState } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import ButtonFacebook from "../Buttons/app.button-facebook";
@@ -181,4 +181,4 @@ const FormRegister = () => {
   );
 };
 
-export default FormRegister;
+export default memo(FormRegister);

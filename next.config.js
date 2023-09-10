@@ -1,8 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  serverRuntimeConfig: {
-    NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
-  },
   images: {
     remotePatterns: [
       {
@@ -13,12 +10,17 @@ const nextConfig = {
       },
     ],
   },
-  i18n: {
-    locales: ["default", "/", ""],
-    defaultLocale: "default",
-    localeDetection: true,
+
+  // i18n: {
+  //   locales: ["default", "/", ""],
+  //   defaultLocale: "default",
+  //   localeDetection: true,
+  // },
+  // trailingSlash: true,
+
+  experimental: {
+    appDir: true,
   },
-  trailingSlash: true,
 };
 
 module.exports = nextConfig;

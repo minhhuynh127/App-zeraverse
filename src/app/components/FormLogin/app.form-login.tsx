@@ -1,14 +1,19 @@
 "use client";
 import logo from "@/public/images/logos/logo_02.png";
 import { yupResolver } from "@hookform/resolvers/yup";
+import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
 import { redirect, useRouter } from "next/navigation";
+import { memo, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 import * as yup from "yup";
 import ButtonFacebook from "../Buttons/app.button-facebook";
 import ButtonGoogle from "../Buttons/app.button-google";
 import { useSession } from "next-auth/react";
+import { login } from "../../services/auth-service";
+import { useAuthContext } from "../../context/AuthProvider";
 
 const schema = yup
   .object({
@@ -20,46 +25,27 @@ let errorPassword: string = "";
 
 const FormLogin = () => {
   const router = useRouter();
-
-  // check user login
-  const { data: session } = useSession();
-  if (session && session.user) {
-    const userLogin = session.user;
-    localStorage.setItem("userData", JSON.stringify(userLogin));
-    redirect("/");
-  }
+  const { loginEmail } = useAuthContext();
+  console.log(loginEmail);
 
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm({
     resolver: yupResolver(schema),
   });
-  const onSubmit = async (data: {}, e: any) => {
+  const onSubmit = async (data: any, e: any) => {
     e.preventDefault();
-    try {
-      const response = await fetch(
-        "https://user-api.zeraverse.io/api/v1/auth/login-email",
-        {
-          method: "POST", // or 'PUT'
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        }
-      );
-      if (response.status === 200) {
-        const result = await response.json();
-        localStorage.setItem("userData", JSON.stringify(result));
-        router.push("/");
-      } else {
-        errorPassword = "Invalid email or password";
-      }
-    } catch (error) {
-      console.error("Error:", error);
-    }
+    loginEmail(data);
   };
+  const { data: session }: any = useSession();
+  if (session && session.user) {
+    redirect("/");
+  } else {
+    router.push("/login");
+  }
+
   return (
     <div className="flex justify-center items-center h-[100vh]">
       <div className="px-[61px] pt-[17px] pb-[40px] bg-black/70 rounded-[30px] flex flex-col justify-center items-center">
@@ -76,6 +62,8 @@ const FormLogin = () => {
             </label>
             <input
               {...register("email")}
+              name="email"
+              id="email"
               type="text"
               className="w-[400px] h-[45px] bg-white rounded-[10px] pl-2 text-violet-700 text-xl"
             />
@@ -93,7 +81,10 @@ const FormLogin = () => {
             <div className="w-[400px] h-[45px] relative">
               <input
                 {...register("password")}
+                name="password"
+                id="password"
                 type="password"
+                autoComplete="off"
                 className=" bg-white rounded-[10px] w-full h-full pl-2 text-violet-700 text-xl"
               />
               <svg
@@ -180,4 +171,4 @@ const FormLogin = () => {
   );
 };
 
-export default FormLogin;
+export default memo(FormLogin);
