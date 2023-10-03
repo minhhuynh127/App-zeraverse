@@ -1,10 +1,11 @@
 "use client";
 import type { Metadata } from "next";
+import { SessionProvider } from "next-auth/react";
 import { Inter, Lato, Nunito } from "next/font/google";
 import { useEffect } from "react";
-import "./globals.css";
-import { SessionProvider } from "next-auth/react";
 import { AuthContextProvider } from "./context/AuthProvider";
+import "./globals.css";
+import { ToastContainer } from "react-toastify";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -50,15 +51,14 @@ export default function RootLayout({
       className={`${lato.variable} ${nunito.variable} ${inter.variable}`}
     >
       <body
-        className="bg-body object-cover bg-cover"
+        className="bg-body object-cover bg-cover body-scrollbar"
         suppressHydrationWarning={true}
       >
         <AuthContextProvider>
           <SessionProvider>
-            <div className="w-full ">{children}</div>
+            <div className="w-full">{children}</div>
           </SessionProvider>
         </AuthContextProvider>
-        {/* <Script src="../../node_modules/tw-elements/dist/js/tw-elements.umd.min.js" /> */}
       </body>
     </html>
   );

@@ -1,31 +1,54 @@
 "use client";
-import { items } from "@/src/app/components/ItemsSimpleShop/images/images";
+// import { items } from "@/src/app/components/ItemsSimpleShop/images/images";
+import price from "@/public/images/shops/price.png";
+import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
-import ItemsSimpleShop from "../../components/ItemsSimpleShop/app.items-simple-shop";
+import { useEffect, useState } from "react";
+import AvatarShop from "../../components/ItemsSimpleShop/AvatarShop/app.avatar-shop";
+import CoverShop from "../../components/ItemsSimpleShop/CoverShop/app.cover-shop";
+import PlaytimesShop from "../../components/ItemsSimpleShop/PlaytimesShop/app.playtime-shop";
+import { useAuthContext } from "../../context/AuthProvider";
+import { getAllItemByShop } from "../../services/shop.service";
 
 const SimpleShopPageh1 = () => {
-  // let type = ["Avatar", "Cover-page", "Playtimes"];
-  const [itemsState, setItemsState] = useState<any>(items);
-  const [filterType, setFilterType] = useState<string>("Avatar");
+  const { token, logOut, userInfo } = useAuthContext();
+  const [filterCategoryId, setfilterCategoryId] = useState<number>(1);
+  const [filterStatus, setFilterStatus] = useState<string>("All");
+  const [dataCoverShop, setDataCoverShop] = useState<Array<any>>([]);
+  const [dataPlaytimesShop, setDataPlaytimesShop] = useState<Array<any>>([]);
+  const [dataAvatarShop, setDataAvatarShop] = useState<Array<any>>([]);
+  const getAllAvatarShop = async (param: number) => {
+    const res = await getAllItemByShop(param, token);
+    setDataAvatarShop(res?.data?.rows);
+  };
+  const getAllCoverShop = async (param: number) => {
+    const res = await getAllItemByShop(param, token);
+    setDataCoverShop(res?.data?.rows);
+  };
+  const getAllPlaytimesShop = async (param: number) => {
+    const res = await getAllItemByShop(param, token);
+    setDataPlaytimesShop(res?.data?.rows);
+  };
+  useEffect(() => {
+    if (token && userInfo) {
+      getAllAvatarShop(1);
+      getAllCoverShop(2);
+      getAllPlaytimesShop(3);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [token, userInfo]);
   const hadleShowAvatar = () => {
-    setFilterType("Avatar");
+    setfilterCategoryId(1);
   };
   const hadleShowCoverPage = () => {
-    setFilterType("Cover-page");
+    setfilterCategoryId(2);
   };
   const hadleShowPlaytimes = () => {
-    setFilterType("Playtimes");
+    setfilterCategoryId(3);
   };
-  // console.log(filterType);
-
-  const renderItems = itemsState.filter(
-    (item: any) => filterType === item.type
-  );
-  // console.log(renderItems);
 
   return (
-    <div className="bg-black/80 h-auto w-full rounded-[20px] border-[5px] border-violet-300">
+    <div className="bg-black/80 min-h-[1000px] w-full rounded-[20px] border-[5px] border-violet-300">
       <Link
         href={"/"}
         className=" text-pink-500 font-lato font-bold text-sm mt-[21px] ml-[21px] block"
@@ -51,7 +74,7 @@ const SimpleShopPageh1 = () => {
           <button
             onClick={() => hadleShowAvatar()}
             className={`${
-              filterType === "Avatar" ? "active" : ""
+              filterCategoryId === 1 ? "active" : ""
             } w-[150px] h-[48px] py-[10px] px-[37px] font-lato font-bold text-base text-white rounded-tl-[20px] rounded-tr-[20px] text-center whitespace-nowrap bg-violet-500 transition-all `}
           >
             Avatar
@@ -59,7 +82,7 @@ const SimpleShopPageh1 = () => {
           <button
             onClick={() => hadleShowCoverPage()}
             className={` ${
-              filterType === "Cover-page" ? "active" : ""
+              filterCategoryId === 2 ? "active" : ""
             } w-[150px] h-[48px] py-[10px] px-[37px] font-lato font-bold text-base text-white rounded-tl-[20px] rounded-tr-[20px] text-center whitespace-nowrap bg-violet-500 transition-all `}
           >
             Cover Page
@@ -67,34 +90,96 @@ const SimpleShopPageh1 = () => {
           <button
             onClick={() => hadleShowPlaytimes()}
             className={`${
-              filterType === "Playtimes" ? "active" : ""
+              filterCategoryId === 3 ? "active" : ""
             } w-[150px] h-[48px] py-[10px] px-[37px] font-lato font-bold text-base text-white rounded-tl-[20px] rounded-tr-[20px] text-center whitespace-nowrap bg-violet-500 transition-all `}
           >
             Paytimes
           </button>
         </div>
         <div className="w-full bg-[#5B21B6]/50 border-[4px] border-pink-300 rounded-[30px] px-[54px] pb-[60px]">
-          <div className=" flex justify-end gap-4 mt-[18px] mr-[69px]">
-            <div className="flex gap-1">
-              <input type="radio" id="all" value={"all"} className="" />
-              <label className="font-lato font-medium text-sm leading-[22.4px] text-white">
-                All
-              </label>
+          <div className=" flex justify-between items-center gap-4 mt-[18px] mr-[69px]">
+            <div className="text-white font-bold text-3xl flex items-center gap-2">
+              <span>{userInfo?.zera}</span>
+              <div>
+                <Image
+                  priority={true}
+                  src={price}
+                  alt=""
+                  className="w-[30px] h-[30px]"
+                />
+              </div>
             </div>
-            <div className="flex gap-1">
-              <input type="radio" id="buy" value={"buy"} className="" />
-              <label className="font-lato font-medium text-sm leading-[22.4px] text-white">
-                Buy
-              </label>
-            </div>
-            <div className="flex gap-1">
-              <input type="radio" id="owned" value={"owned"} className="" />
-              <label className="font-lato font-medium text-sm leading-[22.4px] text-white">
-                Owned
-              </label>
+            <div className="flex gap-4">
+              <div className="flex gap-1">
+                <input
+                  type="radio"
+                  id="all"
+                  name="filter"
+                  value="All"
+                  className=""
+                  onChange={(e) => setFilterStatus(e.target.value)}
+                />
+                <label className="font-lato font-medium text-sm leading-[22.4px] text-white">
+                  All
+                </label>
+              </div>
+              <div className="flex gap-1">
+                <input
+                  type="radio"
+                  id="buy"
+                  name="filter"
+                  value="Buy"
+                  className=""
+                  onChange={(e) => setFilterStatus(e.target.value)}
+                />
+                <label className="font-lato font-medium text-sm leading-[22.4px] text-white">
+                  Buy
+                </label>
+              </div>
+              <div className="flex gap-1">
+                <input
+                  type="radio"
+                  id="owned"
+                  name="filter"
+                  value="Owned"
+                  className=""
+                  onChange={(e) => setFilterStatus(e.target.value)}
+                />
+                <label className="font-lato font-medium text-sm leading-[22.4px] text-white">
+                  Owned
+                </label>
+              </div>
             </div>
           </div>
-          <ItemsSimpleShop itemsPerPage={8} itemsRender={renderItems} />
+          <>
+            {filterCategoryId === 1 ? (
+              <AvatarShop
+                filterStatus={filterStatus}
+                data={dataAvatarShop}
+                itemsPerPage={8}
+              ></AvatarShop>
+            ) : (
+              <></>
+            )}
+            {filterCategoryId === 2 ? (
+              <CoverShop
+                filterStatus={filterStatus}
+                data={dataCoverShop}
+                itemsPerPage={4}
+              ></CoverShop>
+            ) : (
+              <></>
+            )}
+            {filterCategoryId === 3 ? (
+              <PlaytimesShop
+                filterStatus={filterStatus}
+                data={dataPlaytimesShop}
+                itemsPerPage={8}
+              ></PlaytimesShop>
+            ) : (
+              <></>
+            )}
+          </>
         </div>
       </div>
     </div>

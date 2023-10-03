@@ -1,6 +1,9 @@
 "use client";
+import { data } from "@/src/app/(OnlyTopBar)/user/achievements/images";
 import { useAuthContext } from "@/src/app/context/AuthProvider";
+import { getGameByCategorySlug } from "@/src/app/services/game-service";
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
 const CategoryItem = () => {
@@ -35,40 +38,43 @@ const CategoryItem = () => {
       // console.log(item.children[0]);
 
       item.children[0].classList.remove(
-        "w-[50%]",
+        "w-[94px]",
         "rounded-bl-[10px]",
-        "h-full"
+        "h-[94px]",
+        "row-span-1"
       );
-      item.children[0].classList.add("w-full", "rounded-tr-[10px]");
+      item.children[0].classList.add("w-full", "h-full", "rounded-tr-[10px]");
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [itemRef.current]);
-
+  // console.log("data", dataCategories);
   return (
     <div
       ref={parentRef}
       className="w-full grid grid-cols-11 grid-flow-dense gap-4"
     >
       {dataCategories?.map((cate, index) => (
-        <div
+        <Link
+          href={`/game/categories/${cate?.slug}`}
           key={index}
-          className="flex justify-center items-center bg-white rounded-[10px] col-span-2 gap-2 overflow-hidden"
+          className="flex justify-center items-center bg-white rounded-[10px] col-span-2 row-span-1 gap-2 overflow-hidden cursor-pointer max-h-[204px]"
         >
-          <div className="w-[50%] h-full rounded-tl-[10px] rounded-bl-[10px] overflow-hidden">
+          <div className="w-[94px] h-[94px] rounded-tl-[10px] rounded-bl-[10px] overflow-hidden">
             <Image
+              priority={true}
               ref={imageRef}
               width={500}
               height={500}
               src={cate?.thumbnail}
               alt="catePicture"
-              className={`w-full h-full ${index} hover:scale-110 transition-all`}
+              className={`${index} object-fill hover:scale-110 transition-all`}
             />
           </div>
 
-          <span className="text-violet-900 text-base font-semibold py-2 block w-full text-center">
+          <span className="text-violet-900 text-base font-semibold py-2 block w-full text-center flex-1">
             {cate?.label}
           </span>
-        </div>
+        </Link>
       ))}
     </div>
   );

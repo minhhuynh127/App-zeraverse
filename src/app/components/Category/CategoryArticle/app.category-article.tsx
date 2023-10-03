@@ -4,6 +4,7 @@ import Image from "next/image";
 import { memo, useState } from "react";
 import ReactPaginate from "react-paginate";
 import Button from "../../Buttons/app.button";
+import imageDefaul from "@/public/images/category-article/imageDefault.jpg";
 
 const CategoryArticle = ({ itemsPerPage }: { itemsPerPage: number }) => {
   const { dataArticles } = useAuthContext();
@@ -32,27 +33,40 @@ const CategoryArticle = ({ itemsPerPage }: { itemsPerPage: number }) => {
   };
   return (
     <>
-      <div className="flex flex-wrap gap-4 w-full">
+      <div className="grid grid-cols-2 gap-4 w-full">
         {currentItems.map((article, index) => (
           <div
             key={index}
-            className="w-[49%] max-w-full h-[250px] max-h-full flex items-center bg-gradient-to-br from-[#89F8FF]/25 via-[#FFA5EB]/25 to-[#FFF59E]/25 p-1 rounded-[20px] col-span-5 row-span-1 gap-4 border border-pink-700"
+            className="col-span-1 h-[250px] max-h-full flex items-center bg-gradient-to-br from-[#89F8FF]/25 via-[#FFA5EB]/25 to-[#FFF59E]/25 p-1 rounded-[20px]  gap-4 border border-pink-700"
           >
-            <Image
-              src={article.featured_image}
-              width={500}
-              height={500}
-              alt="gamePicture"
-              className={`w-[40%] h-full rounded-[20px] object-cover`}
-            />
-            <div className="flex flex-col gap-[10px] justify-center items-start">
+            {article?.featured_image ? (
+              <Image
+                priority={true}
+                src={article.featured_image}
+                width={500}
+                height={500}
+                alt="gamePicture"
+                className={`w-[40%] h-full rounded-[20px] object-cover`}
+              />
+            ) : (
+              <Image
+                priority={true}
+                src={imageDefaul}
+                width={500}
+                height={500}
+                alt="gamePicture"
+                className={`w-[40%] h-full rounded-[20px] object-cover`}
+              />
+            )}
+
+            <div className="w-[60%] overflow-hidden flex flex-col gap-[10px] justify-center items-start px-4">
               <Button className="w-[80px] h-[24px] px-[10px] py-[6px] rounded-[10px] bg-white font-nunito font-normal text-[10px]">
                 Car Game
               </Button>
-              <h3 className="font-lato font-bold text-2xl leading-[33.6px] text-white">
+              <h3 className="w-full  truncate font-lato font-bold text-2xl leading-[33.6px] text-white ">
                 {article.title}
               </h3>
-              <p className="font-nunito font-light text-xs leading-[16.8px] text-white">
+              <p className="w-full break-words font-nunito font-light text-xs leading-[16.8px] text-white">
                 {article.seo_description}
               </p>
               <span className="font-nunito font-light text-xs leading-[16.8px] text-white">

@@ -6,7 +6,12 @@ const ResetPasswordPage = () => {
   return (
     <div className="flex justify-center items-center h-full">
       <div className="px-[61px] pt-[17px] pb-[40px] bg-black/70 rounded-[30px] flex flex-col justify-center items-center">
-        <Image src={logo} alt="logo" className="w-[200px] h-[108px]" />
+        <Image
+          priority={true}
+          src={logo}
+          alt="logo"
+          className="w-[200px] h-[108px]"
+        />
         <form action="" className="mt-4">
           <h1 className="font-bold fot-lato text-[28px] leading-[39.2px] text-white">
             Reset Password

@@ -20,7 +20,7 @@ const myFont = localFont({
 
 const TopBar = () => {
   const { data: session } = useSession();
-  const { username, token, isLoginEmail } = useAuthContext();
+  const { isLoginEmail, userInfo } = useAuthContext();
   const [userLoginGoogle, serUserLoginGoogle] = useState<any>({});
   const [isLoginGoogle, setisLoginGoogle] = useState<boolean>(false);
   useEffect(() => {
@@ -29,7 +29,8 @@ const TopBar = () => {
       serUserLoginGoogle(session.user);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [session]);
+
   // Open Category
   const [open, setOpen] = useState<boolean>(false);
   const hadleShowCategory = () => {
@@ -47,11 +48,12 @@ const TopBar = () => {
   };
 
   return (
-    <div className="flex flex-col gap-4">
-      <div className="bg-top-bar object-cover w-[204px] ml-[11px] rounded-[20px] flex flex-col items-center px-[20px] py-[11px] box-border ">
+    <div className="w-[204px] max-w-full flex flex-col gap-4">
+      <div className="bg-top-bar object-cover w-[204px] rounded-[20px] flex flex-col items-center px-[20px] py-[11px] box-border ">
         <Link href={"/"}>
           <div>
             <Image
+              priority={true}
               src={logoTopbar}
               alt="logo top bar"
               className="max-w-[134px] max-h-[72px] mt-[10px]"
@@ -118,18 +120,17 @@ const TopBar = () => {
                   fill="#C4B5FD"
                 />
               </svg>
-
-              {isSearch && (
-                <SearchModal
-                  className={`${
-                    isSearch
-                      ? "translate-x-0 animate-openSearch visible"
-                      : " translate-x-[-400px] !animate-closeSearch hidden"
-                  }`}
-                  click={() => hadleSearch()}
-                />
-              )}
             </button>
+            {isSearch && (
+              <SearchModal
+                className={`${
+                  isSearch
+                    ? "animate-openSearch visible"
+                    : "!animate-closeSearch hidden"
+                }`}
+                click={() => hadleSearch()}
+              />
+            )}
           </li>
         </ul>
 
@@ -148,15 +149,33 @@ const TopBar = () => {
         {/* user login */}
         {(isLoginEmail || isLoginGoogle) && (
           <div
-            className="flex flex-col justify-center items-center mt-[18px] relative"
+            className="flex flex-col justify-center items-center mt-[18px] relative cursor-pointer"
             onClick={() => hadleOpenUserMenu()}
           >
             <div>
-              <Image src={userImage} alt="" />
+              {userInfo.avatar ? (
+                <Image
+                  priority={true}
+                  src={userInfo.avatar}
+                  width={500}
+                  height={500}
+                  alt=""
+                  className="w-[120px] h-[120px] object-cover rounded-[20px]"
+                />
+              ) : (
+                <Image
+                  priority={true}
+                  src={userImage}
+                  width={500}
+                  height={500}
+                  alt=""
+                  className="w-[120px] h-[120px] object-cover rounded-[20px]"
+                />
+              )}
             </div>
             <span className="font-lato font-medium text-base leading-[25.6px] tracking-[.2%] text-[#FFFFFF]">
-              {username ?? username}
-              {userLoginGoogle ? userLoginGoogle?.name : "Username"}
+              {userInfo ? userInfo.username : ""}
+              {userLoginGoogle ? userLoginGoogle?.name : ""}
             </span>
 
             {openUserMenu && (
@@ -182,12 +201,7 @@ const TopBar = () => {
             </div>
           </div>
         )}
-        <Link
-          href={"/simple-shop"}
-          className="flex justify-center items-center w-[149px] h-[31px] bg-pink-700 text-white py-[3px] px-[30px] rounded-[10px] text-xs font-nunito font-bold leading-[19.2px] mt-4 hover:opacity-70 transition-opacity"
-        >
-          Shop
-        </Link>
+
         <div className="w-full bg-pink-700 h-[34px] rounded-[10px] flex justify-center items-center mt-[20px]">
           <span
             className={`${myFont.className} text-[#FFFF] text-base font-normal leading-[20.66px] tracking-[2px]`}

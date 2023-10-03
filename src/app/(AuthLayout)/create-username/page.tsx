@@ -8,6 +8,7 @@ import * as yup from "yup";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
+import { useAuthContext } from "../../context/AuthProvider";
 
 const schema = yup
   .object({
@@ -23,9 +24,8 @@ const schema = yup
   })
   .required();
 const CreateUsernamePage = () => {
-  const router = useRouter();
   const [newUsername, setNewUsername] = useState("");
-
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -33,19 +33,17 @@ const CreateUsernamePage = () => {
   } = useForm({
     resolver: yupResolver(schema),
   });
-
+  const { token } = useAuthContext();
   const onSubmit = async (data: { username: string }) => {
     data.username = data.username.toLowerCase();
     if (!isValid) return;
-    const token = localStorage.getItem("accessTokenTemp");
-
     try {
       const response = await fetch(
         "https://user-api.zeraverse.io/api/v1/users/username",
         {
           method: "PUT",
           headers: {
-            "Content-Type": "application/json",
+            "Content-Type": "application/json; charset=utf-8",
             Authorization: "Bearer " + token,
           },
           body: JSON.stringify({ username: newUsername }),
@@ -68,6 +66,7 @@ const CreateUsernamePage = () => {
           progress: undefined,
           theme: "light",
         });
+        router.push("/");
       }
     } catch (error) {
       toast.error("🦄 Error", {
@@ -87,7 +86,12 @@ const CreateUsernamePage = () => {
     <div className="flex justify-center items-center h-full">
       <div className="px-[61px] pt-[17px] pb-[40px] bg-black/70 rounded-[30px] flex flex-col justify-center items-center">
         <div>
-          <Image src={logo} alt="logo" className="w-[200px] h-[108px]" />
+          <Image
+            priority={true}
+            src={logo}
+            alt="logo"
+            className="w-[200px] h-[108px]"
+          />
         </div>
         <form
           action="/forgot-password"

@@ -25,7 +25,7 @@ import playtimesShop6 from "@/public/images/shops/playtimes-shop-6.png";
 import playtimesShop7 from "@/public/images/shops/playtimes-shop-7.png";
 import playtimesShop8 from "@/public/images/shops/playtimes-shop-8.png";
 
-export const items: {
+export const itemsAvatar: {
   name: string;
   type: string;
   price: number;
@@ -151,8 +151,15 @@ export const items: {
     status: 0,
     src: avatar8,
   },
+];
 
-  // Cover page
+export const itemsCover: {
+  name: string;
+  type: string;
+  price: number;
+  status: number;
+  src: StaticImageData;
+}[] = [
   {
     name: "Crystal Planet",
     type: "Cover-page",
@@ -181,8 +188,15 @@ export const items: {
     status: 0,
     src: coverPage4,
   },
+];
 
-  // Playtimes
+export const itemsPlaytimes: {
+  name: string;
+  type: string;
+  price: number;
+  status: number;
+  src: StaticImageData;
+}[] = [
   {
     name: "+5 minutes",
     type: "Playtimes",

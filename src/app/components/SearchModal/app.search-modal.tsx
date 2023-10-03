@@ -1,8 +1,12 @@
 import iconLeft from "@/public/left.png";
 import Image from "next/image";
-import Button from "../Buttons/app.button";
-import RecentlyPlayed from "../Recentlyplayed/app.recently-played";
+import { useAuthContext } from "../../context/AuthProvider";
 import PopularWeek from "../Popular/PopularWeek/app.popular-week";
+import RecentlyPlayed from "../Recentlyplayed/app.recently-played";
+import { useEffect, useState } from "react";
+import { Search } from "../../services/game-service";
+import { IoClose } from "react-icons/io5";
+import imgGameDefaul from "@/public/images/games/placehoder.png";
 
 const SearchModal = ({
   click,
@@ -11,18 +15,35 @@ const SearchModal = ({
   click: () => void;
   className: string;
 }) => {
+  const { dataCategories } = useAuthContext();
+  const [resultSearch, setResultSearch] = useState<any>();
+  const [keySearch, setKeySearch] = useState<string>("");
+  const handleSearch = (keySearch: string) => {
+    Search(keySearch).then((response) => {
+      setResultSearch(response?.data);
+    });
+  };
+  useEffect(() => {
+    if (keySearch === "") {
+      setResultSearch({});
+    } else {
+      handleSearch(keySearch);
+    }
+  }, [keySearch]);
+  const { game, gameByCategory, category } = resultSearch || {};
   return (
     <div
-      className={`${className} fixed inset-0 bg-black/50 w-full h-full z-50 transition-transform `}
+      onClick={click}
+      className={` fixed inset-0 bg-black/50 w-full h-full z-50 animate-opacity `}
     >
       <div
-        className="bg-[#C4B5FD]/50 pl-[27px] pr-[59px] w-[740px] h-auto py-[20px] relative"
+        className={` ${className} bg-[#c4b5fd80] pl-[27px] pr-[59px] w-[684px] h-full py-[20px] transition-transform relative btn-list`}
         onClick={(e) => e.stopPropagation()}
       >
         <div className="w-16 h-16 absolute right-[-8px]" onClick={click}>
-          <Button className="w-full h-full rounded-[50%] bg-white flex justify-center items-center absolute right-[-32px]">
-            <Image src={iconLeft} alt="" />
-          </Button>
+          <button className="w-full h-full rounded-[50%] bg-white flex justify-center items-center absolute right-[-30px]">
+            <Image priority={true} src={iconLeft} alt="" />
+          </button>
         </div>
         <div className="w-full flex justify-between items-center relative">
           <svg
@@ -54,94 +75,161 @@ const SearchModal = ({
             </defs>
           </svg>
           <input
+            onChange={(e) => setKeySearch(e.target.value)}
             type="text"
+            value={keySearch}
             placeholder="What are you playing today?"
             className="text-violet-300 text-[22px] font-nunito font-bold w-full h-16 bg-white rounded-[15px] pl-[80px] placeholder:text-violet-300"
           />
+          {keySearch === "" ? (
+            <svg
+              className="absolute right-4"
+              width="31"
+              height="31"
+              viewBox="0 0 31 31"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M22.125 19.5H20.7425L20.2525 19.0275C22.0268 16.9695 23.0019 14.3422 23 11.625C23 9.37524 22.3329 7.176 21.083 5.30539C19.8331 3.43478 18.0565 1.97682 15.978 1.11588C13.8995 0.254929 11.6124 0.0296656 9.40585 0.468573C7.19932 0.90748 5.17249 1.99084 3.58167 3.58167C1.99084 5.17249 0.90748 7.19932 0.468573 9.40585C0.0296656 11.6124 0.254929 13.8995 1.11588 15.978C1.97682 18.0565 3.43478 19.8331 5.30539 21.083C7.176 22.3329 9.37524 23 11.625 23C14.4425 23 17.0325 21.9675 19.0275 20.2525L19.5 20.7425V22.125L26.945 29.5551C27.6659 30.2746 28.8335 30.274 29.5538 29.5538C30.274 28.8335 30.2746 27.6659 29.5551 26.945L22.125 19.5ZM11.625 19.5C7.26751 19.5 3.75001 15.9825 3.75001 11.625C3.75001 7.26751 7.26751 3.75001 11.625 3.75001C15.9825 3.75001 19.5 7.26751 19.5 11.625C19.5 15.9825 15.9825 19.5 11.625 19.5Z"
+                fill="#8B5CF6"
+              />
+            </svg>
+          ) : (
+            <div
+              className="absolute right-4 cursor-pointer
+            "
+              onClick={() => setKeySearch("")}
+            >
+              <IoClose size={40} fill="#8B5CF6" />
+            </div>
+          )}
+        </div>
 
-          <svg
-            className="absolute right-4"
-            width="31"
-            height="31"
-            viewBox="0 0 31 31"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M22.125 19.5H20.7425L20.2525 19.0275C22.0268 16.9695 23.0019 14.3422 23 11.625C23 9.37524 22.3329 7.176 21.083 5.30539C19.8331 3.43478 18.0565 1.97682 15.978 1.11588C13.8995 0.254929 11.6124 0.0296656 9.40585 0.468573C7.19932 0.90748 5.17249 1.99084 3.58167 3.58167C1.99084 5.17249 0.90748 7.19932 0.468573 9.40585C0.0296656 11.6124 0.254929 13.8995 1.11588 15.978C1.97682 18.0565 3.43478 19.8331 5.30539 21.083C7.176 22.3329 9.37524 23 11.625 23C14.4425 23 17.0325 21.9675 19.0275 20.2525L19.5 20.7425V22.125L26.945 29.5551C27.6659 30.2746 28.8335 30.274 29.5538 29.5538C30.274 28.8335 30.2746 27.6659 29.5551 26.945L22.125 19.5ZM11.625 19.5C7.26751 19.5 3.75001 15.9825 3.75001 11.625C3.75001 7.26751 7.26751 3.75001 11.625 3.75001C15.9825 3.75001 19.5 7.26751 19.5 11.625C19.5 15.9825 15.9825 19.5 11.625 19.5Z"
-              fill="#8B5CF6"
-            />
-          </svg>
-        </div>
-        <ul className="flex gap-4 max-w-full no-scrollbar overflow-x-scroll btn-list cursor-grab pl-0">
-          <li>
-            <Button className="text-black bg-gradient-to-l from-[#FFFFFF] via-#7270FF to-[#000]/20 py-2 px-[20px] rounded-tr-[20px] rounded-br-[20px] mt-4 font-nunito text-xs font-bold leading-[16.37px] whitespace-nowrap cursor-grab">
-              CAR GAME
-            </Button>
-          </li>
-          <li>
-            <Button className="text-black bg-white py-2 px-[20px] rounded-[20px] mt-4 font-nunito text-xs font-bold leading-[16.37px] whitespace-nowrap cursor-grab">
-              .IO GAME
-            </Button>
-          </li>
-          <li>
-            <Button className="text-black bg-white py-2 px-[20px] rounded-[20px] mt-4 font-nunito text-xs font-bold leading-[16.37px] whitespace-nowrap cursor-grab">
-              GAME FOR GIRL
-            </Button>
-          </li>
-          <li>
-            <Button className="text-black bg-white py-2 px-[20px] rounded-[20px] mt-4 font-nunito text-xs font-bold leading-[16.37px] whitespace-nowrap cursor-grab">
-              SHOOTING GAME
-            </Button>
-          </li>
-          <li>
-            <Button className="text-black bg-white py-2 px-[20px] rounded-[20px] mt-4 font-nunito text-xs font-bold leading-[16.37px] whitespace-nowrap cursor-grab">
-              2 PLAYER
-            </Button>
-          </li>
-          <li>
-            <Button className="text-black bg-white py-2 px-[20px] rounded-[20px] mt-4 font-nunito text-xs font-bold leading-[16.37px] whitespace-nowrap cursor-grab">
-              2 PLAYER
-            </Button>
-          </li>
-          <li>
-            <Button className="text-black bg-white py-2 px-[20px] rounded-[20px] mt-4 font-nunito text-xs font-bold leading-[16.37px] whitespace-nowrap cursor-grab">
-              2 PLAYER
-            </Button>
-          </li>
-          <li>
-            <Button className="text-black bg-white py-2 px-[20px] rounded-[20px] mt-4 font-nunito text-xs font-bold leading-[16.37px] whitespace-nowrap cursor-grab">
-              2 PLAYER
-            </Button>
-          </li>
-          <li>
-            <Button className="text-black bg-white py-2 px-[20px] rounded-[20px] mt-4 font-nunito text-xs font-bold leading-[16.37px] whitespace-nowrap cursor-grab">
-              2 PLAYER
-            </Button>
-          </li>
-          <li>
-            <Button className="text-black bg-white py-2 px-[20px] rounded-[20px] mt-4 font-nunito text-xs font-bold leading-[16.37px] whitespace-nowrap cursor-grab">
-              2 PLAYER
-            </Button>
-          </li>
-          <li>
-            <Button className="text-black bg-white py-2 px-[20px] rounded-[20px] mt-4 font-nunito text-xs font-bold leading-[16.37px] whitespace-nowrap cursor-grab">
-              2 PLAYER
-            </Button>
-          </li>
-        </ul>
-        <div className="flex flex-col gap-4 items-start mt-[21px]">
-          <h3 className="text-white text-2xl font-bold leading-[32.74px] font-nunito">
-            Popular this week
-          </h3>
-          <PopularWeek />
-        </div>
-        <div className="flex flex-col gap-4 items-start mt-[21px] mb-[100px]">
-          <h3 className="text-white text-2xl font-bold leading-[32.74px] font-nunito">
-            Recently played
-          </h3>
-          <RecentlyPlayed />
-        </div>
+        {keySearch === "" ? (
+          <>
+            <div className="w-full overflow-x-auto btn-list">
+              <div className="flex gap-4 w-fit cursor-grab pl-0 mt-4 whitespace-nowrap overflow-hidden">
+                {dataCategories?.map((item: any, index: number) => (
+                  <div key={index}>
+                    <button className="bg-white rounded-[20px] flex-center h-9 py-2 px-5 font-semibold text-xs cursor-pointer select-none transition-all hover:bg-violet-500 hover:text-white shadow-xxl uppercase whitespace-nowrap">
+                      {item?.label}
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="flex flex-col gap-4 items-start mt-[21px]">
+              <h3 className="text-white text-2xl font-bold leading-[32.74px] font-nunito">
+                Popular this week
+              </h3>
+              <PopularWeek />
+            </div>
+            <div className="flex flex-col gap-4 items-start mt-[21px]">
+              <h3 className="text-white text-2xl font-bold leading-[32.74px] font-nunito">
+                Recently played
+              </h3>
+              <RecentlyPlayed />
+            </div>
+          </>
+        ) : (
+          <div className="w-full h-auto grid grid-cols-6 gap-4 mt-4 overflow-y-auto">
+            {category?.length > 0 &&
+              category?.map((item: any, index: number) => (
+                <div
+                  key={index}
+                  className="rounded-[10px] col-span-2 flex justify-start items-center transition-all bg-white overflow-hidden cursor-pointer  group"
+                >
+                  {item?.thumbnail ? (
+                    <div className="w-[94px] h-[94px] rounded-tl-[10px] rounded-bl-[10px]">
+                      <Image
+                        src={item?.thumbnail}
+                        alt=""
+                        width={500}
+                        height={500}
+                        className="w-full h-full object-cover group-hover:scale-110  transition-all"
+                      />
+                    </div>
+                  ) : (
+                    <div className="w-[94px] h-[94px] col-span-1 rounded-tl-[10px] rounded-bl-[10px]">
+                      <Image
+                        src={imgGameDefaul}
+                        alt=""
+                        width={500}
+                        height={500}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  )}
+                  <div className="h-full flex items-center rounded-tr-[10px] rounded-br-[10px]">
+                    <span className="text-violet-900 text-base font-semibold py-2 block w-full text-center max-w-[110px] px-4">
+                      {item?.label}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            {gameByCategory?.length > 0 &&
+              gameByCategory?.map((item: any, index: number) => (
+                <div
+                  key={index}
+                  className=" rounded-[10px] col-span-1 relative group"
+                >
+                  {item?.thumbnail ? (
+                    <Image
+                      src={item?.thumbnail}
+                      alt=""
+                      width={500}
+                      height={500}
+                      className="w-[94px] h-[94px] object-cover rounded-[10px] group-hover:scale-105 transition-all"
+                    />
+                  ) : (
+                    <Image
+                      src={imgGameDefaul}
+                      alt=""
+                      width={500}
+                      height={500}
+                      className="w-[94px] h-[94px] object-cover rounded-[10px]"
+                    />
+                  )}
+                  <div className="absolute inset-0 justify-center items-end px-[8px] pb-[2px] hidden group-hover:flex transition-all">
+                    <span className="text-white font-bold text-base whitespace-nowrap truncate ">
+                      {item?.title}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            {game?.length > 0 &&
+              game?.map((item: any, index: number) => (
+                <div
+                  key={index}
+                  className="rounded-[10px] col-span-1 relative group"
+                >
+                  {item?.thumbnail ? (
+                    <Image
+                      src={item?.thumbnail}
+                      alt=""
+                      width={500}
+                      height={500}
+                      className="w-[94px] h-[94px] object-cover rounded-[10px] group-hover:scale-105 transition-all"
+                    />
+                  ) : (
+                    <Image
+                      src={imgGameDefaul}
+                      alt=""
+                      width={500}
+                      height={500}
+                      className="w-[94px] h-[94px] object-cover rounded-[10px]"
+                    />
+                  )}
+                  <div className="absolute inset-0 justify-center items-end px-[8px] pb-[2px] hidden group-hover:flex transition-all">
+                    <span className="text-white font-bold text-base whitespace-nowrap truncate ">
+                      {item?.title}
+                    </span>
+                  </div>
+                </div>
+              ))}
+          </div>
+        )}
       </div>
     </div>
   );

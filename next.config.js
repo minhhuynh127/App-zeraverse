@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: "https",
@@ -9,14 +10,10 @@ const nextConfig = {
         pathname: "**",
       },
     ],
+    experimental: {
+      appDir: true,
+    },
   },
-
-  // i18n: {
-  //   locales: ["default", "/", ""],
-  //   defaultLocale: "default",
-  //   localeDetection: true,
-  // },
-  // trailingSlash: true,
 
   experimental: {
     appDir: true,

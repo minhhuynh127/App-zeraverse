@@ -1,15 +1,40 @@
-import { images } from "@/src/app/components/TopBarLogin/images";
 import Image from "next/image";
-import Button from "../Buttons/app.button";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { useAuthContext } from "../../context/AuthProvider";
+import { getAllItemByShop } from "../../services/shop.service";
+import ModalBuy from "../ModalBuyAvatar/app.modal-buy";
 const TopBarLogin = () => {
+  const { userInfo, token } = useAuthContext();
+  const [itemShops, setItemShops] = useState<Array<any>>([]);
+  const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
+  const [idAvatarDetail, setIdAvatarDetail] = useState<number>();
+  const [zera, setZera] = useState<number>();
+  const handleModalBuyAvatarShop = async (id: number) => {
+    setIsOpenModal(!isOpenModal);
+    setIdAvatarDetail(id);
+  };
+  const getItemAvatarShop = async (param: number) => {
+    const res = await getAllItemByShop(param, token);
+    setItemShops(res?.data?.rows);
+  };
+  useEffect(() => {
+    if (token && userInfo) {
+      getItemAvatarShop(1);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  useEffect(() => {
+    setZera(userInfo?.zera);
+  }, [userInfo?.zera]);
   return (
-    <div className="bg-top-bar object-cover w-[204px] ml-[11px] rounded-[20px] flex flex-col items-center px-[14px] py-[16.38px] box-border">
+    <div className="bg-top-bar object-cover w-[204px] h-[340px] max-h-full  rounded-[20px] flex flex-col items-center py-[16.38px] box-border ">
       <div className="flex gap-2 ">
         <h3
           className="font-nutito font-black
          text-[#FFFFFF] text-base leading-[21px]"
         >
-          4070
+          {userInfo?.zera}
         </h3>
         <svg
           width="23"
@@ -48,18 +73,35 @@ const TopBarLogin = () => {
           />
         </svg>
       </div>
-      <span className="w-full h-[1.5px] bg-[#8657FF] mt-[10px]"></span>
-      <div className="flex flex-wrap justify-between items-center gap-2 mt-[10px]">
-        {images.map((image, index) => (
+      <span className="w-[80%] h-[1.5px] bg-[#8657FF] mt-[10px]"></span>
+      <div className="h-[200px]  overflow-y-scroll item-shop-scrollbar grid grid-cols-2 gap-2 mt-[10px] px-2">
+        {itemShops?.map((item: any, index: number) => (
           <div
             key={index}
             className="flex flex-col justify-center items-center gap-2"
           >
-            <div>
-              <Image src={image.src} alt="" className="" />
+            <div className="w-[80px] h-[80px] relative group transition-all">
+              {item?.url && (
+                <Image
+                  priority={true}
+                  src={item?.url}
+                  width={500}
+                  height={500}
+                  alt=""
+                  className="w-full h-full rounded-[10px] "
+                />
+              )}
+              <div
+                onClick={() => handleModalBuyAvatarShop(item?.id)}
+                className="w-full h-full absolute animate-opacity hidden inset-0 bg-black/40 group-hover:flex justify-center items-center transition-all cursor-pointer"
+              >
+                <span className="w-[60px] py-[6px] text-[10px] font-bold bg-pink-800 rounded-[10px] shadow-sm shadow-[#9D174D] text-white/80 flex justify-center items-center">
+                  Buy now
+                </span>
+              </div>
             </div>
             <div className="flex justify-center items-center gap-2">
-              <span className="text-white">79</span>
+              <span className="text-white">{item?.price}</span>
 
               <svg
                 width="14"
@@ -97,6 +139,18 @@ const TopBarLogin = () => {
           </div>
         ))}
       </div>
+      <Link
+        href={"/simple-shop"}
+        className="flex justify-center items-center w-[149px] h-[31px] bg-pink-700 text-white py-[3px] px-[30px] rounded-[10px] text-xs font-nunito font-bold leading-[19.2px] mt-4 hover:opacity-70 transition-opacity"
+      >
+        Shop
+      </Link>
+      <ModalBuy
+        title={"Avatar"}
+        openModal={isOpenModal}
+        onClick={(id: number) => handleModalBuyAvatarShop(id)}
+        id={idAvatarDetail}
+      />
     </div>
   );
 };

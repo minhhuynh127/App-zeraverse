@@ -6,7 +6,7 @@ const HomePage = async () => {
     <div className="w-full flex flex-col gap-4">
       <Game />
       <CategoryItem />
-      <Trending />
+      <Trending limit={2} page={2} />
     </div>
   );
 };

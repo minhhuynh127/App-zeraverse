@@ -49,6 +49,7 @@ const GameCategoryAll = () => {
         >
           <div>
             <Image
+              priority={true}
               ref={imageRef}
               src={image.src}
               alt="gamePicture"

@@ -1,9 +1,11 @@
+"use client";
+import { useAuthContext } from "@/src/app/context/AuthProvider";
 import Link from "next/link";
-import React from "react";
 
 const ArticleCategoriesPage = () => {
+  const { cateArticle } = useAuthContext();
   return (
-    <div className="w-full bg-black/80 border-[4px] border-pink-400 p-[40px] min-h-[500px]">
+    <div className="w-full min-h-[800px] bg-black/80 border-[4px] border-pink-400 p-[40px]">
       <Link href={"/"} className=" text-pink-500 font-lato font-bold text-sm">
         <div className="flex items-center gap-2">
           <svg
@@ -25,12 +27,13 @@ const ArticleCategoriesPage = () => {
         All Article Category
       </h1>
       <ul className="text-pink-500 font-lato font-normal text-sm leading-[22.6px] flex flex-col gap-[10px] ml-4">
-        <li className="underline underline-offset-2 list-disc">
-          <Link href={"/article/categories/all-articles"}>All Article</Link>
-        </li>
-        <li className="underline underline-offset-2 list-disc">
-          <Link href={"/article/categories/title-article"}>Title Article</Link>
-        </li>
+        {cateArticle?.map((item: any, index: number) => (
+          <li key={index} className="underline underline-offset-2 list-disc">
+            <Link href={`/article/categories/${item?.slug}`}>
+              {item?.label}
+            </Link>
+          </li>
+        ))}
       </ul>
     </div>
   );

@@ -78,6 +78,14 @@ const config: Config = {
             backgroundPosition: "-200% 0",
           },
         },
+        fadeInModalEdit: {
+          "0%": { transform: "scale(0.7)", opacity: "0" },
+          "100%": { transform: "scale(1)", opacity: "1" },
+        },
+        fadeOutModalEdit: {
+          "0%": { transform: "scale(1)", opacity: "1" },
+          "100%": { transform: "scale(0.7)", opacity: "0" },
+        },
         fadeIn: {
           "0%": { top: "83px", opacity: "0" },
           "100%": { top: "63px", opacity: "1" },
@@ -114,18 +122,41 @@ const config: Config = {
           "0%": { opacity: "1" },
           "100%": { opacity: "0" },
         },
+
+        openCreatePlaylist: {
+          "0%": { height: "40px" },
+          "100%": { height: "131px" },
+        },
+        closeCreatePlaylist: {
+          "0%": { height: "131px" },
+          "100%": { height: "40px" },
+        },
+        openDelPlaylist: {
+          "0%": { width: "0px", opacity: "0" },
+          "100%": { width: "100px", opacity: "1" },
+        },
+        closeDelPlaylist: {
+          "0%": { width: "100px", opacity: "1" },
+          "100%": { width: "0px", opacity: "0" },
+        },
       },
       animation: {
         fadeIn: "fadeIn both 0.4s",
         translateFadeIn: "translateFadeIn both 1s",
         openSearch: "openSearch linear 0.4s",
         closeSearch: "closeSearch linear 0.4s",
-        opacity: "opacity linear 1s",
+        opacity: "opacity linear 0.4s",
         opacityOut: "opacityOut linear 0.4s",
         openCategory: "openCategory linear 0.4s",
         closeCategory: "closeCategory linear 0.4s",
         bottomToTop: "bottomToTop linear 0.4s",
         backgroundShine: "backgroundShine 2s linear infinite",
+        fadeInModalEdit: "fadeInModalEdit linear 0.4s",
+        fadeOutModalEdit: "fadeOutModalEdit linear 0.4s",
+        openCreatePlaylist: "openCreatePlaylist linear 0.2s",
+        closeCreatePlaylist: "closeCreatePlaylist linear 0.2s",
+        openDelPlaylist: "openDelPlaylist linear 0.2s",
+        closeDelPlaylist: "closeDelPlaylist linear 0.2s",
       },
     },
   },

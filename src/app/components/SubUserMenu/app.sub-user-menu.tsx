@@ -1,27 +1,22 @@
 "use client";
 import { signOut } from "next-auth/react";
 import Link from "next/link";
-import { useRouter, usePathname } from "next/navigation";
+import { redirect, usePathname } from "next/navigation";
 import { memo } from "react";
+import { TbLogout2 } from "react-icons/tb";
+import { useAuthContext } from "../../context/AuthProvider";
 const SubUserMenu = ({ className }: { className: string }) => {
-  const router = useRouter();
-  const currentPathname = usePathname();
+  const currentPath = usePathname();
+  const { logOut } = useAuthContext();
   const hadleLogOut = () => {
-    console.log("into logout");
-    localStorage.removeItem("username");
-    localStorage.removeItem("accessToken");
+    logOut();
     localStorage.removeItem("userLoginGoogle");
+    currentPath === "/user-profile" ? redirect("/login") : redirect("/");
     signOut();
-    console.log(currentPathname);
-    if (currentPathname === "/user-profile") {
-      router.push("/login");
-    } else if (currentPathname === "/") {
-      router.push("/");
-    }
   };
   return (
     <div
-      className={`w-[204px] h-[150px] z-20 bg-black/80 absolute flex flex-col gap-4 px-4 py-[20px] bottom-[-150px] rounded-[20px] border border-pink-900 animate-bottomToTop transition-all`}
+      className={`w-[204px] min-h-[150px] z-20 bg-black/80 absolute flex flex-col gap-4 px-4 py-[20px] bottom-[-150px] rounded-[20px] border border-pink-900 animate-bottomToTop transition-all`}
     >
       <Link
         href={"/user-profile"}
@@ -57,12 +52,14 @@ const SubUserMenu = ({ className }: { className: string }) => {
         <span>Achievements</span>
       </Link>
       <span className="h-[1px] w-full bg-violet-400 px-[38px] text-white"></span>
-      <button
+      <Link
+        href={`${currentPath === "/user-profile" ? "/login" : "/"}`}
         onClick={hadleLogOut}
-        className="font-lato font-semibold text-violet-400 text-base leading-[22.4px] text-center hover:text-violet-700  transition-colors"
+        className="flex gap-2 justify-center items-center font-lato font-semibold text-violet-200 text-[20px] leading-[22.4px] text-center hover:text-violet-700  transition-colors"
       >
+        <TbLogout2 />
         LogOut
-      </button>
+      </Link>
     </div>
   );
 };

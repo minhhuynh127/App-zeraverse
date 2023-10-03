@@ -43,7 +43,7 @@ const FormRegister = () => {
     })
       .then((response) => {
         if (response.status === 200) {
-          router.push("/login");
+          router.push("/");
         } else {
           alert("Có lỗi!!!");
         }
@@ -55,7 +55,12 @@ const FormRegister = () => {
   return (
     <div className=" h-[100vh] bg-cover flex justify-center items-center ">
       <div className="px-[61px] pt-[17px] pb-[40px] bg-black/70 rounded-[30px] flex flex-col justify-center items-center">
-        <Image src={logo} alt="logo" className="w-[220px] h-[108px]" />
+        <Image
+          priority={true}
+          src={logo}
+          alt="logo"
+          className="w-[220px] h-[108px]"
+        />
         <form
           action="/register"
           className="mt-4"

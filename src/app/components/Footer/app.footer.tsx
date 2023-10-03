@@ -1,13 +1,19 @@
 import Image from "next/image";
 import logoFooter from "@/public/images/logos/logo_02.png";
 import Button from "../Buttons/app.button";
+import { memo } from "react";
 
 const Footer = () => {
   return (
     <div className="bg-footer h-[404px] w-full object-cover">
       <div className="h-full flex justify-between items-center">
         <div className="logo ml-[70px]">
-          <Image src={logoFooter} alt="logo footer" className="object-cover" />
+          <Image
+            priority={true}
+            src={logoFooter}
+            alt="logo footer"
+            className="object-cover"
+          />
         </div>
         <div className="flex justify-between items-center mr-[124px] w-[45%]">
           <div>
@@ -115,4 +121,4 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+export default memo(Footer);

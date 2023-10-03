@@ -2,6 +2,8 @@
 import Image from "next/image";
 import { useEffect, useRef } from "react";
 import { useAuthContext } from "../../context/AuthProvider";
+import imgGameDefault from "@/public/images/games/placehoder.png";
+import Link from "next/link";
 const Game = () => {
   const { dataGames }: { dataGames: Array<any> } = useAuthContext();
 
@@ -42,18 +44,36 @@ const Game = () => {
         className="w-full grid grid-cols-11 grid-flow-dense gap-4"
       >
         {dataGames?.map((game, index) => (
-          <button
-            className="w-full h-full rounded-xl hover:opacity-70 transition-all hover:scale-105 shine-effect"
+          <Link
+            href={`/game-screen/${game.slug}`}
+            className="min-w-[94px] min-h-[94px] rounded-xl transition-all hover:scale-105 shine-effect relative group"
             key={index}
           >
-            <Image
-              src={game?.thumbnail}
-              width={500}
-              height={500}
-              alt="gamePicture"
-              className={`w-full h-full rounded-xl object-cover ${index}`}
-            />
-          </button>
+            {game?.thumbnail ? (
+              <Image
+                priority={true}
+                src={game?.thumbnail}
+                width={500}
+                height={500}
+                alt="gamePicture"
+                className={`w-full h-full rounded-xl object-cover ${index}`}
+              />
+            ) : (
+              <Image
+                priority={true}
+                src={imgGameDefault}
+                width={500}
+                height={500}
+                alt="gamePicture"
+                className={`w-full h-full rounded-xl object-cover ${index}`}
+              />
+            )}
+            <div className="absolute inset-0 justify-center items-end px-[8px] pb-[2px] hidden group-hover:flex transition-all">
+              <span className="text-white font-bold text-base whitespace-nowrap truncate ">
+                {game.title}
+              </span>
+            </div>
+          </Link>
         ))}
       </div>
     </div>

@@ -1,19 +1,16 @@
 "use client";
 import logo from "@/public/images/logos/logo_02.png";
 import { yupResolver } from "@hookform/resolvers/yup";
-import axios from "axios";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { redirect, useRouter } from "next/navigation";
-import { memo, useEffect, useState } from "react";
+import { memo, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { toast } from "react-toastify";
 import * as yup from "yup";
+import { useAuthContext } from "../../context/AuthProvider";
 import ButtonFacebook from "../Buttons/app.button-facebook";
 import ButtonGoogle from "../Buttons/app.button-google";
-import { useSession } from "next-auth/react";
-import { login } from "../../services/auth-service";
-import { useAuthContext } from "../../context/AuthProvider";
 
 const schema = yup
   .object({
@@ -21,13 +18,10 @@ const schema = yup
     password: yup.string().required("Password is required").min(5),
   })
   .required();
-let errorPassword: string = "";
 
 const FormLogin = () => {
   const router = useRouter();
-  const { loginEmail } = useAuthContext();
-  console.log(loginEmail);
-
+  const { loginEmail, errorPassword } = useAuthContext();
   const {
     register,
     handleSubmit,
@@ -40,17 +34,26 @@ const FormLogin = () => {
     loginEmail(data);
   };
   const { data: session }: any = useSession();
-  if (session && session.user) {
-    redirect("/");
-  } else {
-    router.push("/login");
-  }
+
+  useEffect(() => {
+    if (session && session.user) {
+      redirect("/");
+    } else {
+      router.push("/login");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [session]);
 
   return (
     <div className="flex justify-center items-center h-[100vh]">
       <div className="px-[61px] pt-[17px] pb-[40px] bg-black/70 rounded-[30px] flex flex-col justify-center items-center">
         <div>
-          <Image src={logo} alt="logo" className="w-[220px] h-[108px]" />
+          <Image
+            priority={true}
+            src={logo}
+            alt="logo"
+            className="w-[220px] h-[108px]"
+          />
         </div>
         <form action="" className="mt-4" onSubmit={handleSubmit(onSubmit)}>
           <div className="flex flex-col gap-1">

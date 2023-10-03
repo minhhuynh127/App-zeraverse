@@ -44,6 +44,7 @@ const GameCategory = ({ children }: { children: React.ReactNode }) => {
         {imagesGame.map((image, index) => (
           <button className="" key={index}>
             <Image
+              priority={true}
               src={image.src}
               alt="gamePicture"
               className={`w-full h-full rounded-xl object-cover ${index}`}

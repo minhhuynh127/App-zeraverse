@@ -27,18 +27,29 @@ const GameScreenPage = () => {
   return (
     <div className="grid grid-cols-11 grid-flow-row gap-4">
       <div className="col-span-1 row-span-7 w-full h-full">
-        <Image src={bannerAds} alt="" className="object-cover w-full h-full" />
+        <Image
+          priority={true}
+          src={bannerAds}
+          alt=""
+          className="object-cover w-full h-full"
+        />
       </div>
       <div className="col-span-7 row-span-7">
         <div className="grid grid-rows-7 gap-4">
           <div className=" row-span-5 col-span-7 w-full h-full">
             <div>
-              <Image src={banner} alt="" className=" object-cover w-full" />
+              <Image
+                priority={true}
+                src={banner}
+                alt=""
+                className=" object-cover w-full"
+              />
             </div>
             <div className="h-[67px] bg-[#373737] w-full flex justify-between items-center p-4">
               <div className="flex gap-4 h-full w-full items-center">
                 <div>
                   <Image
+                    priority={true}
                     src={pause}
                     alt=""
                     className="object-cover w-[32px] h-[32px]"
@@ -46,6 +57,7 @@ const GameScreenPage = () => {
                 </div>
                 <div>
                   <Image
+                    priority={true}
                     src={imgage1}
                     alt=""
                     className="object-cover h-[50px] w-[50px]"
@@ -60,16 +72,16 @@ const GameScreenPage = () => {
                   00 : 00 : 00
                 </span>
                 <div>
-                  <Image src={heart} alt="" />
+                  <Image priority={true} src={heart} alt="" />
                 </div>
                 <div>
-                  <Image src={add} alt="" />
+                  <Image priority={true} src={add} alt="" />
                 </div>
                 <div>
-                  <Image src={drag} alt="" />
+                  <Image priority={true} src={drag} alt="" />
                 </div>
                 <div>
-                  <Image src={report} alt="" />
+                  <Image priority={true} src={report} alt="" />
                 </div>
               </div>
             </div>
@@ -87,12 +99,13 @@ const GameScreenPage = () => {
                 </div>
                 <div className="flex justify-center items-center gap-10">
                   {iconShare.map((item, index) => (
-                    <Image key={index} src={item.src} alt="" />
+                    <Image priority={true} key={index} src={item.src} alt="" />
                   ))}
                 </div>
               </div>
               <div className="col-span-2 h-full bg-pink-900 flex- flex-col justify-center items-center">
                 <Image
+                  priority={true}
                   src={image22}
                   alt=""
                   className="object-cover w-full h-full"
@@ -100,6 +113,7 @@ const GameScreenPage = () => {
               </div>
               <div className="col-span-1 h-full bg-pink-900 flex- flex-col justify-center items-center">
                 <Image
+                  priority={true}
                   src={image23}
                   alt=""
                   className="object-cover w-full h-full"
@@ -109,7 +123,12 @@ const GameScreenPage = () => {
           </div>
           <div className="w-full row-span-1 col-span-7">
             <div className=" bg-[#8F2A89] w-full rounded-[10px]">
-              <Image src={image8} alt="" className="w-full object-cover" />
+              <Image
+                priority={true}
+                src={image8}
+                alt=""
+                className="w-full object-cover"
+              />
             </div>
           </div>
         </div>
@@ -120,6 +139,7 @@ const GameScreenPage = () => {
             <div className="h-8 rounded-[10px] bg-[#52495D] py-2 px-[10px] flex justify-between items-center">
               <div>
                 <Image
+                  priority={true}
                   src={imgage1}
                   alt=""
                   className="object-cover h-[24px] w-[24px] rounded-[50%]"
@@ -160,6 +180,7 @@ const GameScreenPage = () => {
                   {imgaeGame3.map((item, index) => (
                     <div key={index} className="row-span-1 col-span-1">
                       <Image
+                        priority={true}
                         src={item.src}
                         alt=""
                         className="object-cover w-full h-full rounded-[10px]"
@@ -176,6 +197,7 @@ const GameScreenPage = () => {
               {imgaeGame3.map((item, index) => (
                 <div key={index} className="col-span-1">
                   <Image
+                    priority={true}
                     src={item.src}
                     alt=""
                     className="object-cover w-full h-full rounded-[10px]"
@@ -192,7 +214,12 @@ const GameScreenPage = () => {
         <div className="grid grid-cols-11 gap-4 w-full ">
           {imgaeGame11.map((item, index) => (
             <div key={index} className="col-span-1 ">
-              <Image src={item.src} alt="" className="w-full rounded-[10px]" />
+              <Image
+                priority={true}
+                src={item.src}
+                alt=""
+                className="w-full rounded-[10px]"
+              />
             </div>
           ))}
         </div>
@@ -206,6 +233,7 @@ const GameScreenPage = () => {
               {imgaeGame10.map((item, index) => (
                 <div key={index} className="col-span-1 row-span-1 w-full">
                   <Image
+                    priority={true}
                     src={item.src}
                     alt=""
                     className="w-full rounded-[10px]"
@@ -251,7 +279,12 @@ const GameScreenPage = () => {
               </p>
             </div>
             <div className="flex items-center justify-center mt-8">
-              <Image src={banner} alt="" className="w-[289px] h-[183px]" />
+              <Image
+                priority={true}
+                src={banner}
+                alt=""
+                className="w-[289px] h-[183px]"
+              />
             </div>
           </div>
 
@@ -267,6 +300,7 @@ const GameScreenPage = () => {
                 >
                   <div>
                     <Image
+                      priority={true}
                       src={item.src}
                       alt=""
                       className="w-[63px] h-[63px] rounded-[130px]"
@@ -287,7 +321,12 @@ const GameScreenPage = () => {
                       1000
                     </span>
                     <div>
-                      <Image src={zen} alt="" className="object-cover" />
+                      <Image
+                        priority={true}
+                        src={zen}
+                        alt=""
+                        className="object-cover"
+                      />
                     </div>
                   </div>
                 </div>
@@ -300,6 +339,7 @@ const GameScreenPage = () => {
               {imgaeGame5.map((item, index) => (
                 <div key={index} className="row-span-1 col-span 1 w-full">
                   <Image
+                    priority={true}
                     src={item.src}
                     alt=""
                     className="rounded-[10px] w-full h-full object-cover"
