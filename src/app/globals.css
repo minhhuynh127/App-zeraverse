@@ -109,3 +109,54 @@ button.active {
 .shadow-xxl {
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
+
+.shine-effect::after {
+  content: "";
+  position: absolute;
+  top: -110%;
+  left: -210%;
+  width: 200%;
+  height: 200%;
+  opacity: 0;
+  transform: rotate(30deg);
+  background: hsla(0, 0%, 100%, 0.13);
+  background: linear-gradient(
+    90deg,
+    hsla(0, 0%, 100%, 0.13) 0,
+    hsla(0, 0%, 100%, 0.13) 77%,
+    hsla(0, 0%, 100%, 0.5) 92%,
+    hsla(0, 0%, 100%, 0)
+  );
+  animation: effect 3s ease-in-out infinite;
+}
+@keyframes effect {
+  to {
+    opacity: 1;
+    top: -30%;
+    left: -30%;
+    transition-property: left, top, opacity;
+    transition-duration: 0.7s, 0.7s, 0.15s;
+    transition-timing-function: ease;
+  }
+}
+
+.avatar-chat {
+  margin-left: -10px;
+}
+.avatar-chat:first-child {
+  margin-left: 0;
+}
+.react-emoji {
+  width: 280px !important;
+}
+.react-input-emoji--container {
+  margin: 0 !important;
+  border-radius: 10px !important;
+  background-color: #52495d !important;
+  border: none !important;
+  overflow: hidden !important;
+  text-wrap: wrap !important;
+}
+.react-input-emoji--container::-webkit-scrollbar {
+  display: none !important;
+}

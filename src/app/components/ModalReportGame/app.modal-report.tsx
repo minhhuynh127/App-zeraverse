@@ -108,7 +108,7 @@ const ModalReportGame = ({
                   ></textarea>
                 </div>
                 <div className="w-full flex justify-center items-center ">
-                  <button className="py-[5px] px-[41px] bg-violet-500 font-lato font-bold text-white text-base rounded-[20px] w-[200px] h-[42px] hover:opacity-70 transition-opacity">
+                  <button className="py-[5px] px-[41px] bg-violet-500 font-lato font-bold text-white text-base rounded-[20px] w-[200px] h-[42px] hover:opacity-70 transition-opacity disabled:cursor-not-allowed disabled:opacity-70">
                     Send
                   </button>
                 </div>

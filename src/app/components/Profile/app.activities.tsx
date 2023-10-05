@@ -1,11 +1,11 @@
 /* eslint-disable react/no-unescaped-entities */
+import playlistDefault from "@/public/images/user-images/playlist-default.png";
 import iconRight from "@/public/right.png";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect } from "react";
 import { useAuthContext } from "../../context/AuthProvider";
 import Empty from "../Empty/app.empty";
-import { useEffect } from "react";
-import playlistDefault from "@/public/images/user-images/playlist-default.png";
 const ActivitiesProfile = ({ info }: { info: any }) => {
   const {
     dataMostPlayed,
@@ -26,7 +26,6 @@ const ActivitiesProfile = ({ info }: { info: any }) => {
     getActivities(info?.username, null);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [info?.username]);
-  console.log("activitiesInfo", activitiesInfo);
   return (
     <div className="w-full h-auto bg-black/50 rounded-[20px] flex flex-col justify-between items-center pb-[162px]">
       <div className="w-full h-[75px] rounded-tl-[20px] rounded-tr-[20px] bg-pink-500 flex justify-center items-center">
@@ -231,7 +230,8 @@ const ActivitiesProfile = ({ info }: { info: any }) => {
                 {dataPlaylist?.length > 0 ? (
                   <div className="w-full flex flex-wrap gap-8">
                     {dataPlaylist?.map((item: any, index: number) => (
-                      <div
+                      <Link
+                        href={`/user-profile/playlist-game/${item?.id}`}
                         key={index}
                         className="flex items-center gap-4 border-[2px] border-pink-400 pr-4 h-[94px] hover:scale-105 transition-all group rounded-[10px] cursor-pointer"
                       >
@@ -257,7 +257,7 @@ const ActivitiesProfile = ({ info }: { info: any }) => {
                         <div className="text-white text-xl font-bold">
                           {item.name}
                         </div>
-                      </div>
+                      </Link>
                     ))}
                   </div>
                 ) : (

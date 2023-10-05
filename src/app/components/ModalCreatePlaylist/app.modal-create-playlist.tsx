@@ -5,8 +5,11 @@ import { useEffect, useRef, useState } from "react";
 import { data } from "@/src/app/components/ModalCreatePlaylist/data";
 import { useAuthContext } from "../../context/AuthProvider";
 import {
+  AddGameToPlaylist,
   createPlaylist,
+  deleteItemGamePlaylist,
   deletePlayListById,
+  getAllGamePlaylist,
   getAllPlaylist,
 } from "../../services/game-service";
 import { toast } from "react-toastify";
@@ -68,6 +71,7 @@ const ModalCreatePlaylist = ({
   useEffect(() => {
     if (status === STATUS.SUCCESS) {
       getPlaylist();
+      console.log("allPlaylist", allPlaylist);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [status]);
@@ -94,6 +98,7 @@ const ModalCreatePlaylist = ({
     }
   };
 
+  // Delete Playlist
   const delPlaylist = async (id: number) => {
     try {
       setStatus(STATUS.IN_PROGRESS);
@@ -101,6 +106,39 @@ const ModalCreatePlaylist = ({
       if (data?.success) {
         setStatus(STATUS.SUCCESS);
         toast.success("Success...");
+      }
+    } catch (e) {
+      setStatus(STATUS.NOT_START);
+      toast.error("Error...");
+    }
+  };
+
+  // Add Game to Playlist
+  const handleAddGameToPlaylist = async (item: any) => {
+    try {
+      setStatus(STATUS.IN_PROGRESS);
+      const formData = { playlist_id: item?.id, game_detail_id: game?.id };
+      if (item?.is_added) {
+        try {
+          const res = await getAllGamePlaylist(item?.id, token);
+          const playlistItem = res?.find(
+            (e: any) => e?.game_detail_id === game?.id
+          );
+          const data = await deleteItemGamePlaylist(playlistItem?.id, token);
+          if (data.success) {
+            setStatus(STATUS.SUCCESS);
+          }
+        } catch (e) {
+          setStatus(STATUS.FAIL);
+          toast.error("Error...");
+        }
+      } else {
+        AddGameToPlaylist(token, formData).then((response) => {
+          if (response?.success) {
+            toast.success("Success...");
+            setStatus(STATUS.SUCCESS);
+          }
+        });
       }
     } catch (e) {
       setStatus(STATUS.NOT_START);
@@ -213,9 +251,15 @@ const ModalCreatePlaylist = ({
                       {item?.name}
                     </h3>
                     <div className="h-[60px] flex justify-center items-center gap-2">
-                      <button>
-                        <IoIosAdd color="white" size={30} />
-                      </button>
+                      {item?.is_added ? (
+                        <button onClick={() => handleAddGameToPlaylist(item)}>
+                          <IoIosAdd color="#30fa30" size={30} />
+                        </button>
+                      ) : (
+                        <button onClick={() => handleAddGameToPlaylist(item)}>
+                          <IoIosAdd color="white" size={30} />
+                        </button>
+                      )}
                       <div className="mr-3">
                         <button>
                           {idSelected === item?.id ? (

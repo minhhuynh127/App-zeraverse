@@ -10,6 +10,8 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import ButtonFacebook from "../Buttons/app.button-facebook";
 import ButtonGoogle from "../Buttons/app.button-google";
+import { registerEmail } from "../../services/auth-service";
+import { toast } from "react-toastify";
 
 const schema = yup
   .object({
@@ -27,30 +29,18 @@ const FormRegister = () => {
   } = useForm({
     resolver: yupResolver(schema),
   });
-
   const [isAccept, setIsAccept] = useState<boolean>(false);
   const [hidePass, setHidePass] = useState<boolean>(false);
 
-  const onSubmit = (data: {}, e: any) => {
+  const onSubmit = (data: any, e: any) => {
     e.preventDefault();
 
-    fetch("https://user-api.zeraverse.io/api/v1/auth/register-email", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((response) => {
-        if (response.status === 200) {
-          router.push("/");
-        } else {
-          alert("Có lỗi!!!");
-        }
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+    registerEmail(data).then((response) => {
+      if (response.success) {
+        toast.success("Register success...");
+        router.push("/login");
+      }
+    });
   };
   return (
     <div className=" h-[100vh] bg-cover flex justify-center items-center ">

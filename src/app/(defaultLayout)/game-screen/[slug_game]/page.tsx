@@ -1,14 +1,14 @@
 "use client";
 import bannerAds from "@/public/images/game-screen/Banner ads.png";
-import imgage1 from "@/public/images/game-screen/image-14.png";
 import image22 from "@/public/images/game-screen/image-22.png";
 import image23 from "@/public/images/game-screen/image-23.png";
 import image8 from "@/public/images/game-screen/image-8.png";
 import pause from "@/public/images/game-screen/pause.png";
 import zen from "@/public/images/game-screen/zen.png";
-import imgGameDefault from "@/public/images/games/placehoder.png";
+import imgGameDefault from "@/public/images/games/placeholder.png";
 import avatarDefault from "@/public/images/hall-of-fame/avatar1.png";
 import logo from "@/public/images/logos/logo-1.png";
+import ChatBox from "@/src/app/components/ChatBox/app.chat";
 import ModalCreatePlaylist from "@/src/app/components/ModalCreatePlaylist/app.modal-create-playlist";
 import ModalReportGame from "@/src/app/components/ModalReportGame/app.modal-report";
 import { useAuthContext } from "@/src/app/context/AuthProvider";
@@ -18,12 +18,17 @@ import {
   loveGamePlayed,
 } from "@/src/app/services/game-service";
 import { getHalfOfFamesBySlug } from "@/src/app/services/half-of-fames-service";
-import { formatDate } from "@/src/app/utils/helper";
+import { formatDate, getTimeRemaining } from "@/src/app/utils/helper";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { MdOutlineZoomOutMap, MdReportGmailerrorred } from "react-icons/md";
 import { iconShare } from "../images/images";
+import {
+  TIME_COUNTER_TYPE,
+  useSocketContext,
+} from "@/src/app/context/socket-context";
+import { SOCKET_EVENT } from "@/src/app/utils/constant";
 
 const GameScreenPage = ({ params }: { params: { slug_game: string } }) => {
   const [game, setGame] = useState<any>();
@@ -41,6 +46,10 @@ const GameScreenPage = ({ params }: { params: { slug_game: string } }) => {
     activitiesInfo,
     setActivitiesInfo,
   } = useAuthContext();
+
+  const { socketCLI, setConnect, setIsCountdown, playedTime } =
+    useSocketContext();
+
   const [isLoveGame, setIsLoveGame] = useState<boolean>(false);
   const {
     created_at,
@@ -57,8 +66,16 @@ const GameScreenPage = ({ params }: { params: { slug_game: string } }) => {
     thumbnail,
   } = game ?? {};
 
+  const playedTimeFormat: TIME_COUNTER_TYPE = getTimeRemaining(playedTime);
   const gameCategory: Array<any> =
     gameRelates?.game_category?.game_detail || [];
+
+  // Connect
+  useEffect(() => {
+    setConnect(true);
+    return () => setConnect(false);
+  });
+
   const getGame = () => {
     getGameBySlug(params.slug_game).then((response) => {
       setGame(response?.data);
@@ -109,23 +126,15 @@ const GameScreenPage = ({ params }: { params: { slug_game: string } }) => {
 
   const handlePlayGame = () => {
     setPlayGames(!playGames);
-    if (dataRecentPlayed?.length > 0) {
-      dataRecentPlayed.map((item: any, index: number) => {
-        if (!item?.id === game?.id) {
-          dataRecentPlayed.push(game);
-          setActivitiesInfo((prev: any) => ({
-            ...(prev || {}),
-            [activitiesInfo?.recentlyPlayed]: dataRecentPlayed,
-          }));
-        }
-      });
-    } else {
-      dataRecentPlayed.push(game);
-      setActivitiesInfo((prev: any) => ({
-        ...(prev || {}),
-        [activitiesInfo?.recentlyPlayed]: dataRecentPlayed,
-      }));
-    }
+
+    socketCLI.emit(SOCKET_EVENT.USER_PLAY_GAME);
+    setIsCountdown(true);
+  };
+  const handleStopGame = () => {
+    setPlayGames(!playGames);
+
+    socketCLI.emit(SOCKET_EVENT.USER_STOP_PLAY);
+    setIsCountdown(false);
   };
 
   // Modal playlist
@@ -168,7 +177,7 @@ const GameScreenPage = ({ params }: { params: { slug_game: string } }) => {
                 <div className="flex gap-4 h-full w-full items-center">
                   <div
                     className="cursor-pointer"
-                    onClick={() => setPlayGames(false)}
+                    onClick={() => handleStopGame()}
                   >
                     <Image
                       priority={true}
@@ -202,7 +211,7 @@ const GameScreenPage = ({ params }: { params: { slug_game: string } }) => {
                 </div>
                 <div className="flex gap-6 h-full w-full items-center justify-end">
                   <span className="w-[110px] h-[29px] rounded-[10px] px-[10px] py-[5px] bg-[#5B5B5B] text-[#FFFFFF] font-semibold font-inter text-base flex justify-center items-center">
-                    00 : 00 : 00
+                    {`${playedTimeFormat.hours} : ${playedTimeFormat.minutes} : ${playedTimeFormat.seconds}`}
                   </span>
 
                   {/* Love Game */}
@@ -364,40 +373,8 @@ const GameScreenPage = ({ params }: { params: { slug_game: string } }) => {
       {/* Chat */}
       <div className="col-span-3 row-span-7 w-full">
         <div className="grid grid-rows-7 grid-cols-3 gap-4 w-full h-full">
-          <div className="row-span-3 col-span-3  flex flex-col justify-between bg-[#585858]/50">
-            <div className="h-8 rounded-[10px] bg-[#52495D] py-2 px-[10px] flex justify-between items-center">
-              <div>
-                <Image
-                  priority={true}
-                  src={imgage1}
-                  alt=""
-                  className="object-cover h-[24px] w-[24px] rounded-[50%]"
-                />
-              </div>
-              <span className="font-inter font-normal text-xs leading-[14.52px] text-white">
-                +100 More
-              </span>
-            </div>
-            <div className="flex-1"></div>
-            <div className="h-8 rounded-[10px] bg-[#52495D] py-2 px-[10px] flex justify-between items-center">
-              <input
-                type="text"
-                className="w-[320px] h-[37px] rounded-[10px] py-[10px] px-[20px] placeholder-white/50 text-[#FFFFFF]/50"
-                placeholder="Say something ... "
-              />
-              <svg
-                width="14"
-                height="13"
-                viewBox="0 0 14 13"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M0.119902 11.9469C0.120677 12.6868 0.896959 13.1697 1.56103 12.8433L14.4683 6.4988L1.56089 0.154257C0.896848 -0.172146 0.120598 0.31064 0.119756 1.05056L0.115775 4.54974C0.115191 5.06321 0.503577 5.49368 1.0144 5.54573L10.3673 6.4988L1.06486 6.97276C0.532635 6.99988 0.115184 7.4396 0.115742 7.97251L0.119902 11.9469Z"
-                  fill="#BD1ECB"
-                />
-              </svg>
-            </div>
+          <div className="row-span-3 col-span-3 flex flex-col justify-between bg-[#585858]/50 rounded-[10px]">
+            <ChatBox game={game} />
           </div>
 
           <div className="row-span-3 col-span-3  ">

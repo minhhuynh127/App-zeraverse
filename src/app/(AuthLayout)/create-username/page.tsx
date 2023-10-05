@@ -9,6 +9,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import { useAuthContext } from "../../context/AuthProvider";
+import { createUsername } from "../../services/auth-service";
 
 const schema = yup
   .object({
@@ -38,47 +39,16 @@ const CreateUsernamePage = () => {
     data.username = data.username.toLowerCase();
     if (!isValid) return;
     try {
-      const response = await fetch(
-        "https://user-api.zeraverse.io/api/v1/users/username",
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json; charset=utf-8",
-            Authorization: "Bearer " + token,
-          },
-          body: JSON.stringify({ username: newUsername }),
+      await createUsername(newUsername, token).then((response: any) => {
+        if (response?.success) {
+          toast.success("Create username success...");
+          router.push("/login");
+        } else {
+          router.push("/create-username");
         }
-      );
-
-      const result = await response.json();
-      // console.log(result);
-
-      if (result && result.data) {
-        // console.log(result.data);
-
-        toast.success("🦄 Success...!", {
-          position: "top-right",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-        });
-        router.push("/");
-      }
-    } catch (error) {
-      toast.error("🦄 Error", {
-        position: "top-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
       });
+    } catch (error) {
+      throw error;
     }
   };
 

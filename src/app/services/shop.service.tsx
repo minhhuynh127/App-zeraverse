@@ -1,6 +1,6 @@
 import axios from "axios";
 const api = axios.create({
-  baseURL: "https://user-api.zeraverse.io/api/v1", // Replace with your API base URL
+  baseURL: "https://user-api.stg.zeraverse.io/api/v1", // Replace with your API base URL
 });
 
 // Get All Item Shop

@@ -13,6 +13,8 @@ const InputCheckbox = ({
   name: string;
 }) => {
   const { field } = useController({ control, name: name });
+  // console.log("field", field);
+  // console.log("control", control);
   return (
     <>
       <input

@@ -2,7 +2,7 @@ import axios from "axios";
 import exp from "constants";
 
 const api = axios.create({
-  baseURL: "https://user-api.zeraverse.io/api/v1", // Replace with your API base URL
+  baseURL: "https://user-api.stg.zeraverse.io/api/v1", // Replace with your API base URL
 });
 export async function fetchDataGame() {
   try {
@@ -236,6 +236,24 @@ export const loveGamePlayed = async (token: string, game_detail_id: number) => {
 export const createPlaylist = async (token: string, body: any) => {
   try {
     const { data } = await api.post("/game/playlist", body, {
+      headers: {
+        "Content-Type": "application/json; charset=utf-8",
+        Authorization: "Bearer " + token,
+      },
+    });
+    if (!data.success) {
+      throw new Error(data.message);
+    }
+    return data;
+  } catch (e) {
+    throw e;
+  }
+};
+
+// Add Game To Playlist
+export const AddGameToPlaylist = async (token: string, body: any) => {
+  try {
+    const { data } = await api.post("/game/playlist/item", body, {
       headers: {
         "Content-Type": "application/json; charset=utf-8",
         Authorization: "Bearer " + token,

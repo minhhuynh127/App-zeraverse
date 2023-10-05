@@ -1,7 +1,7 @@
 import axios from "axios";
 import exp from "constants";
 const api = axios.create({
-  baseURL: "https://user-api.zeraverse.io/api/v1", // Replace with your API base URL
+  baseURL: "https://user-api.stg.zeraverse.io/api/v1", // Replace with your API base URL
 });
 
 export const getTopZera = async (filter: string) => {

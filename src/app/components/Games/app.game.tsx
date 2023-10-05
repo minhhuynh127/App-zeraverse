@@ -1,14 +1,19 @@
 "use client";
 import Image from "next/image";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useAuthContext } from "../../context/AuthProvider";
-import imgGameDefault from "@/public/images/games/placehoder.png";
+import imgGameDefault from "@/public/images/games/placeholder.png";
 import Link from "next/link";
 const Game = () => {
   const { dataGames }: { dataGames: Array<any> } = useAuthContext();
+  const [dataGameReverse, setDataGameReverse] = useState<Array<any>>([]);
 
   const parentRef = useRef<HTMLDivElement | null>(null);
   const itemRef = useRef<HTMLButtonElement[]>([]);
+  useEffect(() => {
+    if (dataGames) setDataGameReverse(dataGames.reverse());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dataGames]);
   useEffect(() => {
     if (parentRef.current) {
       // console.log(parentRef.current.children);
@@ -30,7 +35,7 @@ const Game = () => {
       return itemMediumIndex.includes(index);
     });
     itemLargeList.forEach((item) => {
-      item.classList.add("col-span-3", "row-span-3");
+      item.classList.add("col-span-3", "row-span-3", "shine-effect");
     });
     itemMediumList.forEach((item) => {
       item.classList.add("col-span-2", "row-span-2");
@@ -43,10 +48,10 @@ const Game = () => {
         ref={parentRef}
         className="w-full grid grid-cols-11 grid-flow-dense gap-4"
       >
-        {dataGames?.map((game, index) => (
+        {dataGameReverse?.map((game, index) => (
           <Link
             href={`/game-screen/${game.slug}`}
-            className="min-w-[94px] min-h-[94px] rounded-xl transition-all hover:scale-105 shine-effect relative group"
+            className=" min-w-[94px] min-h-[94px] rounded-xl transition-all hover:scale-105 relative group overflow-hidden"
             key={index}
           >
             {game?.thumbnail ? (

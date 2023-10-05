@@ -38,10 +38,10 @@ const Page = () => {
       <div className="bg-body object-cover bg-cover ">
         {(isLoginEmail || isLoginGoogle) && <ModalDailyGift />}
         <div className="flex px-[40px] py-[16px] gap-10">
-          <div className="max-h-[314px] flex flex-col gap-4">
+          <div className="max-h-[314px] flex flex-col gap-4 ">
             <TopBar />
           </div>
-          <div className="w-full flex flex-col gap-4 ">
+          <div className="w-full flex flex-col gap-4">
             <Game />
             <CategoryItem />
             <Trending limit={2} page={1} />

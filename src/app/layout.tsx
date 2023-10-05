@@ -4,8 +4,8 @@ import { SessionProvider } from "next-auth/react";
 import { Inter, Lato, Nunito } from "next/font/google";
 import { useEffect } from "react";
 import { AuthContextProvider } from "./context/AuthProvider";
+import { SocketContextProvider } from "./context/socket-context";
 import "./globals.css";
-import { ToastContainer } from "react-toastify";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -55,9 +55,11 @@ export default function RootLayout({
         suppressHydrationWarning={true}
       >
         <AuthContextProvider>
-          <SessionProvider>
-            <div className="w-full">{children}</div>
-          </SessionProvider>
+          <SocketContextProvider>
+            <SessionProvider>
+              <div className="w-full">{children}</div>
+            </SessionProvider>
+          </SocketContextProvider>
         </AuthContextProvider>
       </body>
     </html>

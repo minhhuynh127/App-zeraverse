@@ -1,6 +1,6 @@
 "use client";
 
-import imgGameDefaul from "@/public/images/games/placehoder.png";
+import imgGameDefaul from "@/public/images/games/placeholder.png";
 import { useAuthContext } from "@/src/app/context/AuthProvider";
 import { getGameByCategorySlug } from "@/src/app/services/game-service";
 import Image from "next/image";

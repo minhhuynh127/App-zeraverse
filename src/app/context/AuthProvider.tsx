@@ -357,6 +357,7 @@ export const AuthContextProvider = ({
       topGamePlayed,
       topPlaystreak,
       popularWeekGame,
+      verifyStatus,
     }),
     [
       clearAuthenticatorData,
@@ -388,6 +389,7 @@ export const AuthContextProvider = ({
       topGamePlayed,
       topPlaystreak,
       popularWeekGame,
+      verifyStatus,
     ]
   );
 

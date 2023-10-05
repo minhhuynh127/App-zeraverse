@@ -153,7 +153,7 @@ const ModalEditUser = ({
                     className="w-full h-full bg-white/95 rounded-[20px] p-4 text-xl"
                     name="quote"
                     id="quote"
-                    value={quoteUser}
+                    value={quoteUser || ""}
                     onChange={(e) => setQuoteUser(e?.target.value)}
                   />
                   <span className="absolute right-2 bottom-2 text-gray-400">

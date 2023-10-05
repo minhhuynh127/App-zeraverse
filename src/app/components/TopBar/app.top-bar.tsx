@@ -11,6 +11,8 @@ import SearchModal from "../SearchModal/app.search-modal";
 import SubUserMenu from "../SubUserMenu/app.sub-user-menu";
 import TopBarLogin from "../TopBarLogin/app.tap-bar-login";
 import { useAuthContext } from "../../context/AuthProvider";
+import { getTimeRemaining } from "../../utils/helper";
+import { useSocketContext } from "../../context/socket-context";
 
 // Font files can be colocated inside of `app`
 const myFont = localFont({
@@ -23,6 +25,7 @@ const TopBar = () => {
   const { isLoginEmail, userInfo } = useAuthContext();
   const [userLoginGoogle, serUserLoginGoogle] = useState<any>({});
   const [isLoginGoogle, setisLoginGoogle] = useState<boolean>(false);
+  const { remainingTime } = useSocketContext();
   useEffect(() => {
     if (session && session.user) {
       setisLoginGoogle(!isLoginGoogle);
@@ -206,7 +209,7 @@ const TopBar = () => {
           <span
             className={`${myFont.className} text-[#FFFF] text-base font-normal leading-[20.66px] tracking-[2px]`}
           >
-            00:60:00
+            {`${remainingTime.hours} : ${remainingTime.minutes} : ${remainingTime.seconds}`}
           </span>
         </div>
       </div>

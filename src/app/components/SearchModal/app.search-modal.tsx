@@ -6,7 +6,7 @@ import RecentlyPlayed from "../Recentlyplayed/app.recently-played";
 import { useEffect, useState } from "react";
 import { Search } from "../../services/game-service";
 import { IoClose } from "react-icons/io5";
-import imgGameDefaul from "@/public/images/games/placehoder.png";
+import imgGameDefaul from "@/public/images/games/placeholder.png";
 
 const SearchModal = ({
   click,
@@ -37,7 +37,7 @@ const SearchModal = ({
       className={` fixed inset-0 bg-black/50 w-full h-full z-50 animate-opacity `}
     >
       <div
-        className={` ${className} bg-[#c4b5fd80] pl-[27px] pr-[59px] w-[684px] h-full py-[20px] transition-transform relative btn-list`}
+        className={` ${className} bg-[#c4b5fd80] pl-[27px] pr-[59px] w-[684px] h-full py-[20px] transition-transform relative`}
         onClick={(e) => e.stopPropagation()}
       >
         <div className="w-16 h-16 absolute right-[-8px]" onClick={click}>
@@ -108,7 +108,7 @@ const SearchModal = ({
 
         {keySearch === "" ? (
           <>
-            <div className="w-full overflow-x-auto btn-list">
+            <div className="w-full overflow-x-auto hide-scrollbar">
               <div className="flex gap-4 w-fit cursor-grab pl-0 mt-4 whitespace-nowrap overflow-hidden">
                 {dataCategories?.map((item: any, index: number) => (
                   <div key={index}>
@@ -133,7 +133,7 @@ const SearchModal = ({
             </div>
           </>
         ) : (
-          <div className="w-full h-auto grid grid-cols-6 gap-4 mt-4 overflow-y-auto">
+          <div className="w-full max-h-[544px] grid grid-cols-6 gap-4 mt-4 mb-4 overflow-y-auto hide-scrollbar">
             {category?.length > 0 &&
               category?.map((item: any, index: number) => (
                 <div
